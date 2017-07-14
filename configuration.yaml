@@ -73,7 +73,6 @@ wink:
 alarm_control_panel:
   - platform: manual
     name: Stoffel's Alarm
-   # code: 0607
     pending_time: 5
     trigger_time: 5
     disarm_after_trigger: false
