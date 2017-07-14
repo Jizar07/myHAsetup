@@ -1,3 +1,4 @@
 # myHAsetup
 My home assistant setup
-asdf
+This is a work in progress.
+please do not use any of these if you do not know what you are doing.
