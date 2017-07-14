@@ -1,0 +1,66 @@
+## Sonoffs
+#51
+- platform: mqtt
+  name: 'Boys TV'
+  icon: mdi:television
+  state_topic: "stat/sonoff51/POWER"
+  command_topic: "cmnd/sonoff51/power"
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  retain: true
+
+## 52
+- platform: mqtt
+  name: 'master'
+  icon: mdi:ceiling-light
+  state_topic: "stat/master/POWER"
+  command_topic: "cmnd/master/power"
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  retain: true
+## 53
+- platform: mqtt
+  name: 'Dinning Room'
+  icon: mdi:ceiling-light
+  state_topic: "stat/sonoff53/POWER"
+  command_topic: "cmnd/sonoff53/power"
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  retain: true
+# 54
+- platform: mqtt
+  name: 'Red Rope'
+  icon: mdi:lightbulb
+  state_topic: "stat/sonoff54/POWER"
+  command_topic: "cmnd/sonoff54/power"
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  retain: true
+## 55
+- platform: mqtt
+  name: 'Computer'
+  icon: mdi:desktop-classic
+  state_topic: "stat/computer/POWER"
+  command_topic: "cmnd/computer/power"
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  retain: true
+# 56
+- platform: mqtt
+  name: 'blue'
+  icon: mdi:lightbulb
+  state_topic: "stat/blue/POWER"
+  command_topic: "cmnd/blue/power"
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  retain: true
+#
+- platform: rpi_gpio
+  ports:
+    21: siren

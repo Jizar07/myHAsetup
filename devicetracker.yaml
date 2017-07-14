@@ -1,0 +1,20 @@
+###########################  ICLOUD  ####################
+
+# - platform: icloud
+  # username: !secret iclouduser
+  # password: !secret icloudpass
+  # account_name: !secret icloudacc
+
+########################  My phone  #######################
+
+- platform: owntracks
+  cd max_gps_accuracy: 200
+  waypoints: true
+
+############################################################
+
+- platform: netgear
+  host: 192.168.1.1
+  username: !secret nguser
+  password: !secret ngpass
+  track_new_devices: yes

@@ -1,0 +1,65 @@
+- name: Boy's School
+  latitude: !secret boyslat
+  longitude: !secret boyslon
+  radius: 150
+  icon: mdi:school
+
+- name: Scarlett's School
+  latitude: !secret scarlat
+  longitude: !secret scarlon
+  radius: 150
+  icon: mdi:school
+
+- name: Home
+  latitude: !secret homelat
+  longitude: !secret homelon
+  radius: 80
+  icon: mdi:home
+
+- name: Mrs. Joan
+  latitude: 26.478807
+  longitude: -81.784120
+  radius: 80
+  icon: mdi:routes
+
+- name: Connie / Elizabeth
+  latitude: 26.5804139
+  longitude: -81.8294065
+  radius: 80
+  icon: mdi:routes
+
+- name: Janice / Dona / Pat K.
+  latitude: 26.4750705
+  longitude: -81.788648
+  radius: 200
+  icon: mdi:routes
+
+- name: San Marino
+  latitude: 26.455166
+  longitude: -81.7788828
+  radius: 80
+  icon: mdi:routes
+
+- name: Lisa
+  latitude: 26.448501
+  longitude: -81.7702018
+  radius: 80
+  icon: mdi:routes
+
+- name: Diane / Barbara
+  latitude: 26.5435771
+  longitude: -81.8256061
+  radius: 200
+  icon: mdi:routes
+
+- name: Kelly / Alison
+  latitude: 26.5907839
+  longitude: -81.8952685
+  radius: 200
+  icon: mdi:routes
+
+- name: Evelin
+  latitude: 26.5191632
+  longitude: -81.9139008
+  radius: 200
+  icon: mdi:routes

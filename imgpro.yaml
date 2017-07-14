@@ -1,0 +1,22 @@
+#################################################################################
+###############################  IMAGE PROCESSOR   ##############################
+#################################################################################
+
+  # - platform: microsoft_face_detect
+    # confidence: 50
+    # group: stoffels
+    # source:
+      # - entity_id: camera.mycam
+        # name: fd_tester
+      # - entity_id: camera.ip_camera
+        # name: fd_ipcam
+
+  # - platform: microsoft_face_identify
+    # confidence: 50
+    # group: stoffels
+    # source:
+      # - entity_id: camera.mycam
+        # name: id_tester
+      # - entity_id: camera.ip_camera
+        # name: id_ipcam
+########################################################################

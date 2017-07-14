@@ -1,0 +1,97 @@
+homeassistant:
+  name: Stoffel's Home Assistant
+  latitude: !secret homelat
+  longitude: !secret homelon
+  elevation: 435
+  unit_system: imperial
+  time_zone: America/New_York
+  customize: !include customize.yaml
+#
+#################################################################################
+####################################   DEFAULTS   ###############################
+#################################################################################
+
+frontend:
+config:
+updater:
+conversation:
+history:
+logbook:
+sun:
+#zwave: ( NEEDS USB DONGLE )
+discovery:
+upnp: 
+
+#################################################################################
+####################################   INCLUDES   ###############################
+#################################################################################
+
+zone: !include zones.yaml
+group: !include groups.yaml
+automation: !include automations.yaml
+sensor: !include sensors.yaml
+device_tracker: !include devicetracker.yaml
+switch: !include switches.yaml
+script: !include scripts.yaml
+media_player: !include players.yaml
+panel_iframe: !include panels.yaml
+camera: !include cameras.yaml
+#image_processing: !include imgpro.yaml
+#shell_command: !include shellcommand.yaml
+
+#################################################################################
+####################################   CUSTOMS    ###############################
+#################################################################################
+
+
+#
+tts:
+  - platform: google
+    cache: true
+    cache_dir: /tmp/tts
+    time_memory: 300
+#
+http:
+  # api_password: !secret api_password       ##########        USE ONLY ON GETAWAYS         #################
+  # ssl_certificate: !secret ssl_certificate ########## REMEMBER TO CHANGE SETTING ON IFTTT #################
+  # ssl_key: !secret ssl_key
+  # base_url: !secret base_url
+  # trusted_networks:
+    # - 127.0.0.1
+    # - 192.168.1.0/24
+#
+mqtt:
+  broker: 192.168.1.41
+  port: 1883
+  username: !secret username
+  password: !secret password
+#
+wink:
+  email: !secret email
+  password: !secret wink_pass
+#
+alarm_control_panel:
+  - platform: manual
+    name: Stoffel's Alarm
+   # code: 0607
+    pending_time: 5
+    trigger_time: 5
+    disarm_after_trigger: false
+#
+ifttt:
+  key: !secret ifttt_key
+#
+# microsoft_face:  ##########################  QUOTA REACHED -  WAIT FOR BETTER OPTIONS  #################
+  # api_key: !secret api_key
+  # azure_region: eastus2
+
+emulated_hue:
+  type: google_home
+  # host_ip: 192.168.1.18
+  listen_port: 80
+#
+
+# switch pi:
+  # platform: rpi_gpio
+  # ports:
+   # 40: siren

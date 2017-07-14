@@ -1,0 +1,378 @@
+##########################################################
+###################### AUTOMATIONS #######################
+##########################################################
+
+  automation.detection:
+    friendly_name: Dectection
+    icon: mdi:white-balance-iridescent
+#
+  automation.noac:
+    friendly_name: AC not working
+    icon: mdi:air-conditioner
+  automation.tempup:
+    friendly_name: Temperature Up
+    icon: mdi:thermometer-lines
+  automation.tempdown:
+    friendly_name: Temperature Down
+    icon: mdi:thermometer
+#
+  automation.update:
+    friendly_name: HA Update
+    icon: mdi:home-assistant
+#
+  automation.10_pm:
+    friendly_name: Timer 10 PM
+    icon: mdi:timer
+  automation.730_am:
+    friendly_name: Timer 7:30 AM
+    icon: mdi:timer
+  automation.boys_tv:
+    friendly_name: Boys TV Off
+    icon: mdi:television-classic
+#
+  automation.back_door:
+    friendly_name: Back Door Sensor
+    icon: mdi:glassdoor
+  automation.front_door:
+    friendly_name: Front Door Sensor
+    icon: mdi:glassdoor
+  automation.garage_door_open:
+    friendly_name: Garage Door Opened
+    icon: mdi:garage-open
+  automation.garage_door_closed:
+    friendly_name: Garage Door Closed
+    icon: mdi:garage
+#
+  automation.alarm_home:
+    friendly_name: In Home Alarm
+    icon: mdi:security-home
+  automation.alarm_away:
+    friendly_name: Away Alarm
+    icon: mdi:alarm-light
+  automation.flash_lights:
+    friendly_name: Flahs Lights
+    icon: mdi:alarm-light
+  automation.disarm:
+    friendly_name: Disarm Alarm
+    icon: mdi:alarm-off
+#
+  automation.delivery:
+    friendly_name: Mail
+    icon: mdi:mailbox
+#
+
+#
+##########################################################
+######################## SENSORS #########################
+##########################################################
+
+  alarm_control_panel.stoffels_alarm:
+    friendly_name: Alarm
+    icon: mdi:alarm
+#
+  binary_sensor.front_door_opened:
+    friendly_name: Front Door
+    icon: mdi:glassdoor
+#
+  binary_sensor.motion_sensor_motion:
+    friendly_name: Motion/Temperature Sensor
+    icon: mdi:thermometer-lines
+#
+  binary_sensor.patio_door_opened:
+    friendly_name: Back Door
+    icon: mdi:glassdoor
+#
+  cover.garage_door:
+    friendly_name: Garage Door
+    icon: mdi:garage
+#
+  sensor.fastcom_download:
+    friendly_name: Internet Speed
+    icon: mdi:speedometer
+#
+  sensor.deliveries_today:
+    icon: mdi:package-variant
+#
+  sensor.packages_in_transit:
+    icon: mdi:truck-delivery
+
+##########################################################
+######################## PLAYERS #########################
+##########################################################
+
+  media_player.home:
+    friendly_name: Google Home
+    icon: mdi:google-assistant
+#
+  media_player.mastercast:
+    friendly_name: Master Cast
+    icon: mdi:cast   
+#
+  media_player.un60ju7090_un60ju7090:
+    friendly_name: 4K TV 60
+    icon: mdi:television
+#
+  media_player.daddys_kodi:
+    friendly_name: Jizar's Kodi
+    icon: mdi:kodi
+#
+  media_player.scarletts_kodi:
+    friendly_name: Scarlett's Kodi
+    icon: mdi:kodi
+#
+  media_player.4k_tv_60:
+    friendly_name: 4K TV 60
+    icon: mdi:television
+#
+##########################################################
+######################## LIGHTS  #########################
+##########################################################
+ 
+  light.backyard:
+    friendly_name: Backyard
+    icon: mdi:theme-light-dark
+    custom_ui_state_card: custom-ui
+    state_card_mode: break-slider
+    stretch_slider: true
+    extra_data_template: "{power_consumption!=10}W"
+    hide_control: false
+    show_last_changed: false
+    slider_theme:
+      min: 10
+      max: 200
+      pin: true
+      off_when_min: false
+      report_when_not_changed: false
+#
+  light.hallway:
+    friendly_name: Hallway
+    icon: mdi:lightbulb
+    custom_ui_state_card: custom-ui
+    state_card_mode: break-slider
+    stretch_slider: true
+    extra_data_template: "{power_consumption!=10}W"
+    hide_control: false
+    show_last_changed: false
+    slider_theme:
+      min: 10
+      max: 200
+      pin: true
+      off_when_min: false
+      report_when_not_changed: false
+#
+  light.laundry:
+    friendly_name: Laundry
+    icon: mdi:lightbulb
+    custom_ui_state_card: custom-ui
+    state_card_mode: break-slider
+    stretch_slider: true
+    extra_data_template: "{power_consumption!=10}W"
+    hide_control: false
+    show_last_changed: false
+    slider_theme:
+      min: 10
+      max: 200
+      pin: true
+      off_when_min: false
+      report_when_not_changed: false
+#
+  light.boys_room:
+    friendly_name: Boys Room
+    icon: mdi:lightbulb
+    custom_ui_state_card: custom-ui
+    state_card_mode: break-slider
+    stretch_slider: true
+    extra_data_template: "{power_consumption!=10}W"
+    hide_control: false
+    show_last_changed: false
+    slider_theme:
+      min: 10
+      max: 200
+      pin: true
+      off_when_min: false
+      report_when_not_changed: false
+#
+  light.master:
+    friendly_name: Master Bedroom
+    icon: mdi:lightbulb
+    custom_ui_state_card: custom-ui
+    state_card_mode: break-slider
+    stretch_slider: true
+    extra_data_template: "{power_consumption!=10}W"
+    hide_control: false
+    show_last_changed: false
+    slider_theme:
+      min: 10
+      max: 200
+      pin: true
+      off_when_min: false
+      report_when_not_changed: false
+#
+##########################################################
+######################## SWITCHES ########################
+##########################################################
+ 
+  switch.blue:
+    friendly_name: Blue Rope
+    icon: mdi:blur-linear
+    custom_ui_state_card: custom-ui
+    state_card_mode: break-slider
+    stretch_slider: true
+    extra_data_template: "{power_consumption!=10}W"
+    hide_control: false
+    show_last_changed: false
+    slider_theme:
+      min: 10
+      max: 200
+      pin: true
+      off_when_min: false
+      report_when_not_changed: false
+#
+  switch.red_rope:
+    friendly_name: Red Rope
+    icon: mdi:blur-linear
+    custom_ui_state_card: custom-ui
+    state_card_mode: break-slider
+    stretch_slider: true
+    extra_data_template: "{power_consumption!=10}W"
+    hide_control: false
+    show_last_changed: false
+    slider_theme:
+      min: 10
+      max: 200
+      pin: true
+      off_when_min: false
+      report_when_not_changed: false
+#
+  switch.boys_tv:
+    friendly_name: Boy's TV
+    icon: mdi:television
+    custom_ui_state_card: custom-ui
+    state_card_mode: break-slider
+    stretch_slider: true
+    extra_data_template: "{power_consumption!=10}W"
+    hide_control: false
+    show_last_changed: false
+    slider_theme:
+      min: 10
+      max: 200
+      pin: true
+      off_when_min: false
+      report_when_not_changed: false
+#
+  switch.front_of_the_house:
+    friendly_name: Driveway / Front Door
+    icon: mdi:theme-light-dark
+    custom_ui_state_card: custom-ui
+    state_card_mode: break-slider
+    stretch_slider: true
+    extra_data_template: "{power_consumption!=10}W"
+    hide_control: false
+    show_last_changed: false
+    slider_theme:
+      min: 10
+      max: 200
+      pin: true
+      off_when_min: false
+      report_when_not_changed: false
+#
+  switch.computer:
+    friendly_name: Gameroom PC
+    icon: mdi:desktop-classic
+    custom_ui_state_card: custom-ui
+    state_card_mode: break-slider
+    stretch_slider: true
+    extra_data_template: "{power_consumption!=10}W"
+    hide_control: false
+    show_last_changed: false
+    slider_theme:
+      min: 10
+      max: 200
+      pin: true
+      off_when_min: false
+      report_when_not_changed: false
+#
+  switch.kitchen:
+    friendly_name: Kitchen
+    icon: mdi:ceiling-light
+    custom_ui_state_card: custom-ui
+    state_card_mode: break-slider
+    stretch_slider: true
+    extra_data_template: "{power_consumption!=10}W"
+    hide_control: false
+    show_last_changed: false
+    slider_theme:
+      min: 10
+      max: 200
+      pin: true
+      off_when_min: false
+      report_when_not_changed: false
+#
+  switch.dinning_room:
+    friendly_name: Dinning Room
+    icon: mdi:ceiling-light
+    custom_ui_state_card: custom-ui
+    state_card_mode: break-slider
+    stretch_slider: true
+    extra_data_template: "{power_consumption!=10}W"
+    hide_control: false
+    show_last_changed: false
+    slider_theme:
+      min: 10
+      max: 200
+      pin: true
+      off_when_min: false
+      report_when_not_changed: false
+#
+  switch.master:
+    friendly_name: Fan
+    icon: mdi:fan
+    custom_ui_state_card: custom-ui
+    state_card_mode: break-slider
+    stretch_slider: true
+    extra_data_template: "{power_consumption!=10}W"
+    hide_control: false
+    show_last_changed: false
+    slider_theme:
+      min: 10
+      max: 200
+      pin: true
+      off_when_min: false
+      report_when_not_changed: false
+
+##########################################################
+######################## Devices #########################
+##########################################################
+
+  device_tracker.jizar_nil:
+    friendly_name: Nil's Phone
+    entity_picture: /local/png/nil.png
+#
+  device_tracker.jizar_jizar:
+    friendly_name: Jizar's Phone
+    entity_picture: /local/png/jizar.png
+#
+
+  # image_processing.id_tester:
+    # friendly_name: Faces Detected on Mycam
+    # icon: mdi:tag-faces
+
+  # image_processing.fd_tester:
+    # friendly_name: Face Indentity on MyCam
+    # icon: mdi:face-profile
+
+  # image_processing.id_ipcam:
+    # friendly_name: Faces Detected on IpCam
+    # icon: mdi:tag-faces
+
+  # image_processing.fd_ipcam:
+    # friendly_name: Face Indentity on IpCam
+    # icon: mdi:face-profile
+
+  # microsoft_face.stoffels:
+    # friendly_name: Stoffel's Family Members
+    # icon: mdi:face
+
+##########################################################
+########################         #########################
+##########################################################

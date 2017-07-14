@@ -1,0 +1,225 @@
+default_view:
+  view: true
+  icon: mdi:home
+  entities:
+  - sun.sun
+  - sensor.yr_symbol
+  - sensor.motion_sensor_temperature
+  - sensor.cpu
+  - sensor.speedtest_download
+  - group.deliveries
+  - device_tracker.jizar_jizar
+  - device_tracker.jizar_nil
+  - group.alarm
+  - alarm_control_panel.stoffels_alarm
+  - group.lights
+  - group.switches
+#
+#################################################################################
+#################################      VIEWS       ##############################
+#################################################################################
+#
+alarm_view:
+  view: true
+  name: Alarm System
+  icon: mdi:alarm-light
+  entities:
+  - group.alarm
+automations_view:
+  view: true
+  name: Automations
+  icon: mdi:home-automation
+  entities:
+  - group.automations
+  - script.temperature
+camera_view:
+  view: true
+  name: Cameras
+  icon: mdi:cctv
+  entities:
+  - group.camera
+  - group.image_processing
+  - microsoft_face.stoffels
+lights_view:
+  view: true
+  icon: mdi:lightbulb
+  name: Lights
+  entities:
+  - group.lights
+players_view:
+  view: true
+  name: Media Players
+  icon: mdi:play
+  entities:
+  - group.players
+# remote_view:
+  # view: true
+  # name: Remotes
+  # icon: mdi:remote
+  # entities:
+  # - group.remotes
+Family_room_view:
+  view: true
+  name: Family Room
+  icon: mdi:sofa
+  entities:
+  - switch.blue
+  - switch.red_rope
+  - remote.harmony_hub
+  - media_player.mastercast
+  - media_player.home
+  - media_player.un60ju7090_un60ju7090
+  - media_player.4k_tv_60
+  - media_player.samsung_tv_remote
+bedrooms_view:
+  view: true
+  name: Family Room
+  icon: mdi:hotel
+  entities:
+  - switch.master
+  - light.master
+  - light.boys_room
+  - switch.boys_tv
+# sensors_view:
+  # view: true
+  # name: Sensors
+  # icon: mdi:wifi
+  # entities:
+  # - sun.sun
+  # - sensor.yr_symbol
+  # - sensor.motion_sensor_temperature
+  # - sensor.fastcom_download
+  # - cover.garage_door
+
+#
+#################################################################################
+##################################     GROUPS      ##############################
+#################################################################################
+#
+lights:
+  name: Lights
+  icon: mdi:lightbuld-outline
+  entities:
+  - light.boys_room
+  - light.master
+  - light.hallway
+  - light.laundry
+  - switch.dinning_room
+  - switch.kitchen
+  - switch.red_rope
+  - switch.blue
+  - switch.front_of_the_house
+  - light.backyard
+switches:
+  name: Switches
+  icon: mdi:dip-switch
+  entities:
+  - switch.boys_tv
+  - switch.computer
+  - switch.master
+remotes:
+  name: Remotes
+  icon: mdi:remote
+  entities:
+  - remote.harmony_hub
+alarm:
+  name: Alarm System
+  icon: mdi:alarm-light
+  entities:
+  - cover.garage_door
+  - binary_sensor.motion_sensor_motion
+  - binary_sensor.patio_door_opened
+  - binary_sensor.front_door_opened
+  - alarm_control_panel.stoffels_alarm
+  - automation.alarm_away
+  - automation.alarm_home
+  - automation.flash_lights
+  - automation.detection
+  - automation.disarm
+  view: false
+camera:
+  name: Cameras
+  icon: mdi:cctv
+  entities:
+  - camera.ip_camera
+  - camera.foscam
+  - camera.gameroom_pc
+  - camera.mycam
+  - camera.nilzete
+  - camera.jizar
+image_processing:
+  name: Image Processors
+  icon: mdi:face
+  entities:
+family_room:
+  name: Family Room
+  icon: mdi:sofa
+  entities:
+  - switch.blue_rope
+  - switch.red_rope
+  - remote.harmony_hub
+  - media_player.mastercast
+  - media_player.home
+  - device_tracker.tv_un60ju7090
+players:
+  name: Media Players
+  icon: mdi:play
+  entities:
+  - media_player.home
+  - media_player.daddys_kodi
+  - media_player.scarletts_kodi
+  - media_player.mastercast
+  - media_player.samsung_led32_un32j5303
+  - media_player.samsung_led40_un40j5200
+  - media_player.un60ju7090_un60ju7090
+  - media_player.4k_tv_60
+  - media_player.samsung_tv_remote
+sensors:
+  name: Sensors
+  icon: mdi:wifi
+  entities:
+  - sun.sun
+  - sensor.yr_symbol
+  - sensor.motion_sensor_temperature
+  - sensor.fastcom_download
+  - cover.garage_door
+automations:
+  name: Automations
+  icon: mdi:home-automation
+  entities:
+  - automation.alarm_away
+  - automation.alarm_home
+  - automation.flash_lights
+  - automation.detection
+  - automation.disarm
+  - automation.10_pm
+  - automation.730_am
+  - automation.boys_tv
+  - automation.back_door
+  - automation.front_door
+  - automation.garage_door_closed
+  - automation.garage_door_open
+  - automation.mycam
+  - automation.ipcam  
+  - automation.noac
+  - automation.tempup
+  - automation.tempdown
+  - automation.update
+  - automation.delivery
+topsensors:
+  name: Top Sensors
+  icon: mdi:white-balance-iridescent
+  entities:
+  - sensor.fastcom_download
+  - sensor.motion_sensor_temperature
+  - sensor.yr_symbol
+  - sun.sun
+  - device_tracker.jizar_jizar
+  - device_tracker.jizar_nil
+Deliveries:
+  - sensor.usps_mail
+  - sensor.usps_packages
+  - sensor.ups
+  - sensor.fedex
+  - sensor.deliveries_today
+  - sensor.packages_in_transit

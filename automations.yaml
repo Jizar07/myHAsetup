@@ -1,0 +1,352 @@
+##################################################################################
+##############################                        ############################
+############################## A U T O M A T I O N S  ############################
+##############################                        ############################
+##################################################################################
+
+##################################################################################
+################################   ALARM AWAY   ##################################
+##################################################################################
+
+- alias: 'Alarm Away'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.front_door_opened
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.patio_door_opened
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.motion_sensor_motion
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: alarm_control_panel.stoffels_alarm
+      state: armed_away
+  action:
+    - service: alarm_control_panel.alarm_trigger
+      entity_id: alarm_control_panel.stoffels_alarm
+    - service: switch.turn_on
+      entity_id: switch.siren
+#
+##################################################################################
+###############################   ALARM IN HOME   ################################
+##################################################################################
+
+- alias: 'Alarm Home'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.front_door_opened
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.patio_door_opened
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: alarm_control_panel.stoffels_alarm
+      state: armed_home
+    - condition: time
+      after: '23:00:00'
+      before: '06:00:00'
+  action:
+    - service: alarm_control_panel.alarm_trigger
+      entity_id: alarm_control_panel.stoffels_alarm
+    - service: switch.turn_on
+      entity_id: switch.siren
+#
+##################################################################################
+#########################   LIGHT FLASH / SIREN ON   #############################
+##################################################################################
+
+- alias: Flash Lights
+  hide_entity: True
+  trigger:
+    platform: state
+    entity_id: alarm_control_panel.stoffels_alarm
+    to: 'triggered'
+  action:
+    - service: script.turn_on
+      entity_id:
+        - script.light_flash
+        - script.siren
+#
+##################################################################################
+#########################   LIGHT FLASH / SIREN OFF   ############################
+##################################################################################
+
+- alias: Disarm
+  hide_entity: True
+  trigger:
+    platform: state
+    entity_id: alarm_control_panel.stoffels_alarm
+    to: 'disarmed'
+  action:
+    - service: script.turn_off
+      entity_id:
+        - script.light_loop
+        - script.siren_loop
+        - script.light_flash
+        - script.siren
+    - service: switch.turn_off
+      entity_id: switch.siren
+#
+##################################################################################
+#################################### BACK DOOR ###################################
+##################################################################################
+
+- alias: back door
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.patio_door_opened
+    to: 'on'
+  
+  condition:
+    - condition: state
+      entity_id: alarm_control_panel.stoffels_alarm
+      state: disarmed
+  action:
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.home
+        volume_level: 50
+    # - service: media_player.play_media
+      # data:
+        # entity_id: media_player.home
+        # media_content_id: http://192.168.1.41:8123/local/waves/backdoor.mp3
+        # media_content_type: music
+    - service: tts.google_say
+      entity_id: media_player.home
+      data:
+        message: Back door Open
+#
+##################################################################################
+################################### FRONT DOOR ###################################
+##################################################################################
+
+- alias: front door
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.front_door_opened
+    to: 'on'
+  action:
+    service: tts.google_say
+    entity_id: media_player.home
+    data:
+      message: Front door open
+#
+##################################################################################
+################################## GARAGE DOOR ###################################
+##################################################################################
+
+- alias: garage door open
+  trigger:
+  - platform: state
+    entity_id: cover.garage_door
+    to: open
+  action:
+    service: tts.google_say
+    entity_id: media_player.home
+    data:
+      message: Garage Door Opened
+#
+- alias: garage door closed
+  trigger:
+  - platform: state
+    entity_id: cover.garage_door
+    to: closed
+  action:
+    service: tts.google_say
+    entity_id: media_player.home
+    data:
+      message: Garage Door Closed
+#
+##################################################################################
+####################################    MAIL   ###################################
+##################################################################################
+
+- alias: delivery
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.deliveries_today
+    above: 0
+  # condition:
+    # - condition: template
+      # value_template: '{{trigger.to_state.state|int > trigger.from_state.state|int}}'
+    # - condition: state
+      # entity_id: group.all_devices
+      # state: 'home'
+  action:
+    service: tts.google_say
+    entity_id: media_player.home
+    data_template:
+      message: "You got Mail"
+#
+##################################################################################
+####################################  TIMERS  ####################################
+##################################################################################
+
+- alias: 10 PM
+  trigger:
+  - platform: time
+    at: '22:00:00'
+  action:
+  - service: media_player.volume_set
+    data:
+      entity_id: media_player.home
+      volume_level: 50
+  - service: tts.google_say
+    entity_id: media_player.home
+    data:
+      message: It's 10 pm master, Starting Sleep mode.
+  - service: light.turn_off
+    entity_id:
+    - light.laundry
+    - light.boys_room
+  - service: light.turn_on
+    entity_id: light.hallway
+    data:
+      brightness: 50
+  - service: switch.turn_off
+    entity_id:
+    - switch.blue_rope
+    - switch.red_rope
+    - switch.dinning_room
+    - switch.kitchen
+#
+- alias: 7:30 am
+  trigger:
+  - platform: time
+    at: 07:00:00
+  action:
+  - service: media_player.volume_set
+    data:
+      entity_id: media_player.home
+      volume_level: 100
+  - service: tts.google_say
+    entity_id: media_player.home
+    data:
+      message: It's 7:30 AM, Starting wake up mode.
+  - service: light.turn_off
+    entity_id:
+    - light.hallway
+  - service: switch.turn_on
+    entity_id:
+    - switch.kitchen
+    - switch.51
+#
+- alias: Boys TV
+  trigger:
+  - platform: time
+    at: '23:00:00'
+  action:
+  - service: switch.turn_off
+    entity_id:
+    - switch.boys_tv
+#
+##################################################################################
+####################################  CAMERAS  ###################################
+##################################################################################
+
+# - alias: mycam
+  # id: '1499290448978'
+  # trigger:
+  # - entity_id: image_processing.id_tester   ######### WAIT FOR MICROSOFT FACE TO UPDATE QUOTA ############
+    # platform: state
+    # to: Jizar Stoffel
+  # action:
+  # - service: switch.toggle
+    # entity_id: switch.blue
+  # - service: tts.google_say
+    # entity_id: media_player.home
+    # data:
+      # message: Hello Master, I see you at your computer. Would you like some relaxing music while you are working? 
+#
+# - alias: Ipcam
+  # trigger:
+  # - entity_id: image_processing.id_ipcam
+    # platform: state
+    # to: Jizar Stoffel
+  # action:
+  # - service: switch.turn_on
+    # entity_id: switch.dinning_room
+  # - service: tts.google_say
+    # entity_id: media_player.home
+    # data:
+      # message: Turning Dinning room lights on for you Master.
+ #
+##################################################################################
+##################################  DETECTION  ###################################
+##################################################################################
+
+- alias: detection
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.motion_sensor_motion
+    to: 'off'
+    for:
+      minutes: 5
+  action:
+    - service: switch.turn_off
+      entity_id: switch.kitchen
+    - service: light.turn_off
+      entity_id: light.laundry
+#
+##################################################################################
+##################################   UPDATER   ###################################
+##################################################################################
+
+- alias: Update
+  trigger:
+    - platform: state
+      entity_id: updater.updater
+  action:
+    service: tts.google_say
+    entity_id: media_player.home
+    data_template:
+      message: Update for Home Assistant  {{ states.updater.updater.state }}  is now available.
+#
+##################################################################################
+##################################     TEMP    ###################################
+##################################################################################
+
+- alias: NoAC
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.motion_sensor_temperature
+      above: 83
+  action:
+  - service: media_player.volume_set
+    data:
+      entity_id: media_player.home
+      volume_level: 100
+  - service: tts.google_say
+    entity_id: media_player.home
+    data_template:
+      message: AC not working, The Temperature is  {{ states.sensor.motion_sensor_temperature.state }} degrees and rising.
+- alias: tempup
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.motion_sensor_temperature
+      above: 81
+  action:
+    service: tts.google_say
+    entity_id: media_player.home
+    data_template:
+      message: The Temperature is now  {{ states.sensor.motion_sensor_temperature.state }} degrees.
+#
+- alias: tempdown
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.motion_sensor_temperature
+      below: 76
+  condition:
+    - condition: time
+      after: '07:00:00'
+      before: '23:00:00'
+  action:
+    service: tts.google_say
+    entity_id: media_player.home
+    data_template:
+        message: The Temperature is now {{ states.sensor.motion_sensor_temperature.state }} degrees.
+        
+#

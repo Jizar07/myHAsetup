@@ -1,0 +1,70 @@
+###################################################################
+#########################  LIGHT LOOP AWAY ########################
+###################################################################
+
+  light_flash:
+    alias: Light flash on
+    sequence:
+      - service: homeassistant.turn_on
+        data:
+          entity_id: 
+            - group.all_lights
+            - group.all_switches
+      - delay:
+          seconds: 0.5
+      - service: homeassistant.turn_off
+        data:
+          entity_id: 
+            - group.all_lights
+            - group.all_switches
+      - service: script.turn_on
+        data:
+          entity_id: script.light_loop
+#
+  light_loop:
+    alias: Light flash loop
+    sequence:
+      - delay:
+          # time for flash light off
+          seconds: 1
+      - service: script.turn_on
+        data:
+          entity_id: script.light_flash
+#
+###################################################################
+#########################  SIREN LOOP AWAY ########################
+###################################################################
+
+  siren:
+    alias: Siren on
+    sequence:
+      - service: media_player.volume_set
+        data:
+          entity_id: media_player.home
+          volume_level: 100
+      - service: media_player.play_media
+        data:
+          entity_id: media_player.home
+          media_content_id: http://192.168.1.41:8123/local/waves/siren2.mp3
+          media_content_type: music
+      - service: script.turn_on
+        data:
+          entity_id: script.siren_loop
+#
+  siren_loop:
+    alias: Siren loop
+    sequence:
+      - delay:
+          # repeat every x seconds
+          seconds: 28
+      - service: script.turn_on
+        data:
+          entity_id: script.siren
+#
+  temperature:
+    sequence:
+      - alias: Google TTS
+        service: tts.google_say
+        entity_id: media_player.home
+        data_template:
+          message: '{{ states.sensor.motion_sensor_temperature.state }} degrees'
