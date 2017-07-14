@@ -1,5 +1,4 @@
   kodi:
     title: Kodi
-    #url: http://jizar.ddns.net:8085  ########## WHEN HTTP IS SET FOR LETSENCRYPT ###############
     url: http://192.168.1.100:8085
     icon: mdi:kodi
