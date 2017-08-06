@@ -10,6 +10,10 @@
   monitored_conditions:
     - download
 #
+- platform: time_date
+  display_options:
+    - 'time'
+    - 'date'
 #################################################################################
 ##################################      MAIL       ##############################
 #################################################################################
@@ -58,3 +62,35 @@
 ################################                   ##############################
 #################################################################################
 #
+- platform: systemmonitor
+  resources:
+    - type: disk_use_percent
+      arg: /home
+    - type: memory_free
+#
+
+- platform: google_geocode
+  name: Nil
+  api_key: !secret nilkey
+  origin: device_tracker.jizar_nil
+  options: both
+- platform: google_geocode
+  name: Jizar
+  api_key: !secret jizarkey
+  origin: device_tracker.jizar_jizar
+  options: both
+- platform: google_geocode
+  name: Scarlett
+  api_key: !secret jizarkey
+  origin: device_tracker.scarlett
+  options: both
+#
+################################### PLEX #############################
+#
+- platform: plex
+  host: 192.168.1.28
+  port: 32400
+  name: Plex
+  username: jizar
+  password: sunamu
+  server: plex

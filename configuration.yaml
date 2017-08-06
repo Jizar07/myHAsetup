@@ -10,24 +10,25 @@ homeassistant:
 #################################################################################
 ####################################   DEFAULTS   ###############################
 #################################################################################
-
-frontend:
+hassio:
+shopping_list:
 config:
 updater:
 conversation:
 history:
 logbook:
 sun:
-#zwave: ( NEEDS USB DONGLE )
 discovery:
-upnp: 
+media_extractor:
+upnp:
+  port_mapping: false
 
 #################################################################################
 ####################################   INCLUDES   ###############################
 #################################################################################
 
 zone: !include zones.yaml
-group: !include groups.yaml
+#group: !include groups.yaml
 automation: !include automations.yaml
 sensor: !include sensors.yaml
 device_tracker: !include devicetracker.yaml
@@ -43,7 +44,14 @@ camera: !include cameras.yaml
 ####################################   CUSTOMS    ###############################
 #################################################################################
 
-
+frontend:
+ themes:
+   purple:
+     primary-color: "#6600cc"
+   black:
+     primary-color: black
+zwave:
+  usb_path: /dev/ttyACM0
 #
 tts:
   - platform: google
@@ -52,13 +60,14 @@ tts:
     time_memory: 300
 #
 http:
-  # api_password: !secret api_password       ##########        USE ONLY ON GETAWAYS         #################
-  # ssl_certificate: !secret ssl_certificate ########## REMEMBER TO CHANGE SETTING ON IFTTT #################
-  # ssl_key: !secret ssl_key
-  # base_url: !secret base_url
-  # trusted_networks:
-    # - 127.0.0.1
-    # - 192.168.1.0/24
+  api_password: !secret api_password
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem
+  base_url: !secret base_url
+  trusted_networks: 192.168.1.0/24
+  ip_ban_enabled: true
+  login_attempts_threshold: 1
+
 #
 mqtt:
   broker: 192.168.1.41
@@ -73,6 +82,7 @@ wink:
 alarm_control_panel:
   - platform: manual
     name: Stoffel's Alarm
+    code: !secret code
     pending_time: 5
     trigger_time: 5
     disarm_after_trigger: false
@@ -80,17 +90,15 @@ alarm_control_panel:
 ifttt:
   key: !secret ifttt_key
 #
+
 # microsoft_face:  ##########################  QUOTA REACHED -  WAIT FOR BETTER OPTIONS  #################
   # api_key: !secret api_key
   # azure_region: eastus2
 
 emulated_hue:
-  type: google_home
-  # host_ip: 192.168.1.18
+  host_ip: 192.168.1.41
   listen_port: 80
-#
-
-# switch pi:
-  # platform: rpi_gpio
-  # ports:
-   # 40: siren
+notify:
+  - platform: pushbullet
+    name: Jizar
+    api_key: !secret pushbulletapi

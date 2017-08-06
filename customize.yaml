@@ -20,6 +20,9 @@
     friendly_name: HA Update
     icon: mdi:home-assistant
 #
+  automation.hourly:
+    friendly_name: Time Tell
+    icon: mdi:clock
   automation.10_pm:
     friendly_name: Timer 10 PM
     icon: mdi:timer
@@ -75,8 +78,12 @@
     icon: mdi:glassdoor
 #
   binary_sensor.motion_sensor_motion:
-    friendly_name: Motion/Temperature Sensor
-    icon: mdi:thermometer-lines
+    friendly_name: Kitchen / Family Motion
+    icon: mdi:run-fast
+#
+  sensor.motion_sensor_temperature:
+    friendly_name: Main area Temperature
+    icon: mdi:thermometer
 #
   binary_sensor.patio_door_opened:
     friendly_name: Back Door
@@ -132,213 +139,101 @@
     friendly_name: Backyard
     icon: mdi:theme-light-dark
     custom_ui_state_card: custom-ui
-    state_card_mode: break-slider
-    stretch_slider: true
-    extra_data_template: "{power_consumption!=10}W"
-    hide_control: false
-    show_last_changed: false
-    slider_theme:
-      min: 10
-      max: 200
-      pin: true
-      off_when_min: false
-      report_when_not_changed: false
+    show_last_changed: true
+    extra_badge:
+        attribute: brightness
 #
   light.hallway:
     friendly_name: Hallway
     icon: mdi:lightbulb
     custom_ui_state_card: custom-ui
-    state_card_mode: break-slider
-    stretch_slider: true
-    extra_data_template: "{power_consumption!=10}W"
-    hide_control: false
-    show_last_changed: false
-    slider_theme:
-      min: 10
-      max: 200
-      pin: true
-      off_when_min: false
-      report_when_not_changed: false
+    show_last_changed: true
+    extra_badge:
+        attribute: brightness
 #
   light.laundry:
     friendly_name: Laundry
     icon: mdi:lightbulb
     custom_ui_state_card: custom-ui
-    state_card_mode: break-slider
-    stretch_slider: true
-    extra_data_template: "{power_consumption!=10}W"
-    hide_control: false
-    show_last_changed: false
-    slider_theme:
-      min: 10
-      max: 200
-      pin: true
-      off_when_min: false
-      report_when_not_changed: false
+    show_last_changed: true
+    extra_badge:
+        attribute: brightness
 #
   light.boys_room:
     friendly_name: Boys Room
     icon: mdi:lightbulb
     custom_ui_state_card: custom-ui
-    state_card_mode: break-slider
-    stretch_slider: true
-    extra_data_template: "{power_consumption!=10}W"
-    hide_control: false
-    show_last_changed: false
-    slider_theme:
-      min: 10
-      max: 200
-      pin: true
-      off_when_min: false
-      report_when_not_changed: false
+    show_last_changed: true
+    extra_badge:
+        attribute: brightness
 #
   light.master:
     friendly_name: Master Bedroom
     icon: mdi:lightbulb
     custom_ui_state_card: custom-ui
-    state_card_mode: break-slider
-    stretch_slider: true
-    extra_data_template: "{power_consumption!=10}W"
-    hide_control: false
-    show_last_changed: false
-    slider_theme:
-      min: 10
-      max: 200
-      pin: true
-      off_when_min: false
-      report_when_not_changed: false
+    show_last_changed: true
+    extra_badge:
+        attribute: brightness
 #
 ##########################################################
 ######################## SWITCHES ########################
 ##########################################################
  
   switch.blue:
+    emulated_hue: true
     friendly_name: Blue Rope
     icon: mdi:blur-linear
     custom_ui_state_card: custom-ui
-    state_card_mode: break-slider
-    stretch_slider: true
-    extra_data_template: "{power_consumption!=10}W"
-    hide_control: false
-    show_last_changed: false
-    slider_theme:
-      min: 10
-      max: 200
-      pin: true
-      off_when_min: false
-      report_when_not_changed: false
+    show_last_changed: true
 #
   switch.red_rope:
+    emulated_hue: true
     friendly_name: Red Rope
     icon: mdi:blur-linear
     custom_ui_state_card: custom-ui
-    state_card_mode: break-slider
-    stretch_slider: true
-    extra_data_template: "{power_consumption!=10}W"
-    hide_control: false
-    show_last_changed: false
-    slider_theme:
-      min: 10
-      max: 200
-      pin: true
-      off_when_min: false
-      report_when_not_changed: false
+    show_last_changed: true
 #
   switch.boys_tv:
+    emulated_hue: true
     friendly_name: Boy's TV
     icon: mdi:television
     custom_ui_state_card: custom-ui
-    state_card_mode: break-slider
-    stretch_slider: true
-    extra_data_template: "{power_consumption!=10}W"
-    hide_control: false
-    show_last_changed: false
-    slider_theme:
-      min: 10
-      max: 200
-      pin: true
-      off_when_min: false
-      report_when_not_changed: false
+    show_last_changed: true
 #
   switch.front_of_the_house:
+    emulated_hue: true
     friendly_name: Driveway / Front Door
     icon: mdi:theme-light-dark
     custom_ui_state_card: custom-ui
-    state_card_mode: break-slider
-    stretch_slider: true
-    extra_data_template: "{power_consumption!=10}W"
-    hide_control: false
-    show_last_changed: false
-    slider_theme:
-      min: 10
-      max: 200
-      pin: true
-      off_when_min: false
-      report_when_not_changed: false
+    show_last_changed: true
 #
   switch.computer:
+    emulated_hue: true
     friendly_name: Gameroom PC
     icon: mdi:desktop-classic
     custom_ui_state_card: custom-ui
-    state_card_mode: break-slider
-    stretch_slider: true
-    extra_data_template: "{power_consumption!=10}W"
-    hide_control: false
-    show_last_changed: false
-    slider_theme:
-      min: 10
-      max: 200
-      pin: true
-      off_when_min: false
-      report_when_not_changed: false
+    show_last_changed: true
 #
   switch.kitchen:
+    emulated_hue: true
     friendly_name: Kitchen
     icon: mdi:ceiling-light
     custom_ui_state_card: custom-ui
-    state_card_mode: break-slider
-    stretch_slider: true
-    extra_data_template: "{power_consumption!=10}W"
-    hide_control: false
-    show_last_changed: false
-    slider_theme:
-      min: 10
-      max: 200
-      pin: true
-      off_when_min: false
-      report_when_not_changed: false
+    show_last_changed: true
 #
   switch.dinning_room:
+    emulated_hue: true
     friendly_name: Dinning Room
     icon: mdi:ceiling-light
     custom_ui_state_card: custom-ui
-    state_card_mode: break-slider
-    stretch_slider: true
-    extra_data_template: "{power_consumption!=10}W"
-    hide_control: false
-    show_last_changed: false
-    slider_theme:
-      min: 10
-      max: 200
-      pin: true
-      off_when_min: false
-      report_when_not_changed: false
+    show_last_changed: true
 #
   switch.master:
-    friendly_name: Fan
-    icon: mdi:fan
+    emulated_hue: true
+    friendly_name: Scarlett's TV
+    icon: mdi:television
     custom_ui_state_card: custom-ui
-    state_card_mode: break-slider
-    stretch_slider: true
-    extra_data_template: "{power_consumption!=10}W"
-    hide_control: false
-    show_last_changed: false
-    slider_theme:
-      min: 10
-      max: 200
-      pin: true
-      off_when_min: false
-      report_when_not_changed: false
+    show_last_changed: true
 
 ##########################################################
 ######################## Devices #########################
@@ -352,7 +247,22 @@
     friendly_name: Jizar's Phone
     entity_picture: /local/png/jizar.png
 #
-
+  device_tracker.scarlett:
+    friendly_name: Scarlett's Phone
+    entity_picture: /local/png/scarlett.png
+#
+  sensor.nil:
+    friendly_name: Nil
+    entity_picture: /local/png/nil.png
+#
+  sensor.scarlett:
+    friendly_name: Scarlett
+    entity_picture: /local/png/scarlett.png
+#
+  sensor.jizar:
+    friendly_name: Jizar
+    entity_picture: /local/png/jizar.png
+#
   # image_processing.id_tester:
     # friendly_name: Faces Detected on Mycam
     # icon: mdi:tag-faces
@@ -374,5 +284,77 @@
     # icon: mdi:face
 
 ##########################################################
-########################         #########################
+######################## POWER   #########################
 ##########################################################
+
+  sensor.aeotec_dsb09104_home_energy_meter_energy:
+    friendly_name: Total Energy used
+    icon: mdi:power-plug
+  sensor.aeotec_dsb09104_home_energy_meter_exporting:
+    friendly_name: Exporting Total
+    icon: mdi:export
+  sensor.aeotec_dsb09104_home_energy_meter_interval:
+    friendly_name:  Total Interval
+    icon: mdi:timer-sand
+  sensor.aeotec_dsb09104_home_energy_meter_power: 
+    polling_intensity: 1
+    refresh_value: 2
+    friendly_name: Total Power usage
+    icon: mdi:power
+  sensor.aeotec_dsb09104_home_energy_meter_previous_Reading:
+    friendly_name: Previous Total Reading
+    icon: mdi:chart-bar
+#
+  sensor.aeotec_dsb09104_home_energy_meter_energy_2:
+    friendly_name: Total energy
+    icon: mdi:flash
+  sensor.aeotec_dsb09104_home_energy_meter_exporting_2:
+    friendly_name: Exporting line 1
+    icon: mdi:export
+  sensor.aeotec_dsb09104_home_energy_meter_interval_2:
+    friendly_name: Interval line 1
+    icon: mdi:timer-sand
+  sensor.aeotec_dsb09104_home_energy_meter_power_2:
+    polling_intensity: 1
+    refresh_value: 2
+    friendly_name: Total Amperage
+    icon: mdi:flash
+  sensor.aeotec_dsb09104_home_energy_meter_previous_Reading_2:
+    friendly_name: Previous Reading line 1
+    icon: mdi:chart-bar
+#
+  sensor.aeotec_dsb09104_home_energy_meter_energy_3:
+    friendly_name: Incoming Energy line 2
+    icon: mdi:flash
+  sensor.aeotec_dsb09104_home_energy_meter_exporting_3:
+    friendly_name: Exporting line 2
+    icon: mdi:export
+  sensor.aeotec_dsb09104_home_energy_meter_interval_3:
+    friendly_name: Interval line 2
+    icon: mdi:timer-sand
+  sensor.aeotec_dsb09104_home_energy_meter_power_3:
+    friendly_name: Power usage line 2
+    icon: mdi:power
+  sensor.aeotec_dsb09104_home_energy_meter_previous_Reading_3:
+    friendly_name: Previous Reading line 2
+    icon: mdi:chart-bar
+#
+  sensor.aeotec_dsb09104_home_energy_meter_power_4:
+    friendly_name: Power 4
+    icon: mdi:power
+  sensor.aeotec_dsb09104_home_energy_meter_power_5:
+    friendly_name: Power 5
+    icon: mdi:power
+  sensor.aeotec_dsb09104_home_energy_meter_power_6:
+    friendly_name: Power 6
+    icon: mdi:power
+###############################################################################
+############################## CAMERAS #################################
+#######################################################################
+
+  camera.ip_camera:
+    friendly_name: Gameroom
+    icon: mdi:webcam
+  camera.main_area:
+    friendly_name: Main Area
+    icon: mdi:webcam

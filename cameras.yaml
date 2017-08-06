@@ -1,16 +1,10 @@
 # IP Camera
 - platform: mjpeg
-  mjpeg_url: http://192.168.1.99:99/videostream.cgi?user=&pwd=&resolution=32&rate=13
+  mjpeg_url: http://192.168.1.99:99/videostream.cgi?user=jizar&pwd=sunamu07&resolution=32&rate=13
   name: IP Camera
   icon: mdi:cctv
-- platform: foscam
-  ip: 192.168.1.99
-  port: 99
-  username: jizar
-  password: sunamu07
-  name: FosCam
-  icon: mdi:cctv
-################# GAMEROOM PC
+
+################# MY PC
 # - platform: mjpeg
   # mjpeg_url: http://192.168.1.32:98/cam_1.cgi
   # username: jizar
@@ -18,13 +12,19 @@
   # name: Gameroom Camera
   # icon: mdi:cctv
 ################# GAMEROOM PC
-- platform: mjpeg
-  mjpeg_url: http://192.168.1.16:97/cam_1.cgi
-  username: jizar
-  password: sunamu
-  name: mycam
-  icon: mdi:cctv
+# - platform: mjpeg
+  # mjpeg_url: http://192.168.1.16:97/cam_1.cgi
+  # username: jizar
+  # password: sunamu
+  # name: mycam
+  # icon: mdi:cctv
   
+- platform: generic
+  still_image_url: http://jizar:sunamu07@192.168.1.7:97/mjpeg/snap.cgi?chn=0
+  username: jizar
+  password: sunamu07
+  authentication: digest
+  name: Main Area
  # { "person": "Jizar Stoffel", "group": "stoffels", "camera_entity": "camera.mycam" }
  
 ##########################################################
@@ -32,12 +32,12 @@
 ##########################################################
 
 - platform: generic
-  still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.device_tracker.jizar_nil.attributes.latitude }},{{ states.device_tracker.jizar_nil.attributes.longitude }}&zoom=16&size=500x500&maptype=satellite&markers=color:red%7Clabel:N%7C{{ states.device_tracker.jizar_nil.attributes.latitude }},{{ states.device_tracker.jizar_nil.attributes.longitude }}
+  still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.device_tracker.jizar_nil.attributes.latitude }},{{ states.device_tracker.jizar_nil.attributes.longitude }}&zoom=16&size=350x350&maptype=hybrid&markers=color:red%7Clabel:N%7C{{ states.device_tracker.jizar_nil.attributes.latitude }},{{ states.device_tracker.jizar_nil.attributes.longitude }}
   limit_refetch_to_url_change: true
-  name: Nilzete
+  name: Nilzete map
 #
 - platform: generic
-  still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.device_tracker.jizar_jizar.attributes.latitude }},{{ states.device_tracker.jizar_jizar.attributes.longitude }}&zoom=16&size=500x500&maptype=satellite&markers=color:blue%7Clabel:J%7C{{ states.device_tracker.jizar_jizar.attributes.latitude }},{{ states.device_tracker.jizar_jizar.attributes.longitude }}
+  still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.device_tracker.jizar_jizar.attributes.latitude }},{{ states.device_tracker.jizar_jizar.attributes.longitude }}&zoom=16&size=350x350&maptype=hybrid&markers=color:blue%7Clabel:J%7C{{ states.device_tracker.jizar_jizar.attributes.latitude }},{{ states.device_tracker.jizar_jizar.attributes.longitude }}
   limit_refetch_to_url_change: true
-  name: Jizar
+  name: Jizar map
 #

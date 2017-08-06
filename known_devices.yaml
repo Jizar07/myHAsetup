@@ -1,0 +1,369 @@
+
+jizar_jizar:
+  hide_if_away: false
+  icon:
+  mac:
+  name: jizar
+  picture:
+  track: true
+  vendor:
+
+jizar_nil:
+  hide_if_away: false
+  icon:
+  mac:
+  name: jizar
+  picture:
+  track: true
+  vendor:
+
+04bf6dca8f42:
+  hide_if_away: false
+  icon:
+  mac: 04:BF:6D:CA:8F:42
+  name: --
+  picture:
+  track: false
+  vendor: ZyXEL Communications Corporation
+
+jizarsiphone:
+  hide_if_away: false
+  icon:
+  mac: 9C:8B:A0:1E:03:8D
+  name: jizars-iPhone
+  picture:
+  track: false
+  vendor: Apple, Inc.
+
+f80d603a8e90:
+  hide_if_away: false
+  icon:
+  mac: F8:0D:60:3A:8E:90
+  name: --
+  picture:
+  track: false
+  vendor: CANON INC.
+
+0021cc4ca769:
+  hide_if_away: false
+  icon:
+  mac: 00:21:CC:4C:A7:69
+  name: --
+  picture:
+  track: false
+  vendor: Flextronics International
+
+androidba206253849ef65e:
+  hide_if_away: false
+  icon:
+  mac: E4:40:E2:26:7C:9A
+  name: android-ba206253849ef65e
+  picture:
+  track: false
+  vendor: Samsung Electronics Co.,Ltd
+
+40163b2b40d0:
+  hide_if_away: false
+  icon:
+  mac: 40:16:3B:2B:40:D0
+  name: --
+  picture:
+  track: false
+  vendor: Samsung Electronics Co.,Ltd
+
+ipc:
+  hide_if_away: false
+  icon:
+  mac: C0:21:0D:D1:1A:C3
+  name: IPC
+  picture:
+  track: false
+  vendor: SHENZHEN RF-LINK TECHNOLOGY CO.,LTD.
+
+scarlett:
+  hide_if_away: false
+  icon:
+  mac: 20:E6:17:03:48:A3
+  name: Scarlett
+  picture:
+  track: true
+  vendor: unknown
+
+thermostat00184435:
+  hide_if_away: false
+  icon:
+  mac: D4:81:CA:55:A0:E4
+  name: Thermostat-00184435
+  picture:
+  track: false
+  vendor: iDevices, LLC
+
+googlehome:
+  hide_if_away: false
+  icon:
+  mac: F4:F5:D8:DB:38:B2
+  name: Google-Home
+  picture:
+  track: false
+  vendor: Google, Inc.
+
+chromecast:
+  hide_if_away: false
+  icon:
+  mac: 6C:AD:F8:8C:D6:50
+  name: Chromecast
+  picture:
+  track: false
+  vendor: AzureWave Technology Inc.
+
+harmonyhub:
+  hide_if_away: false
+  icon:
+  mac: 00:04:20:FC:81:E8
+  name: HarmonyHub
+  picture:
+  track: false
+  vendor: Slim Devices, Inc.
+
+xboxone:
+  hide_if_away: false
+  icon:
+  mac: 4C:0B:BE:AB:3A:0C
+  name: XboxOne
+  picture:
+  track: false
+  vendor: Microsoft
+
+android900eab9821a0273d:
+  hide_if_away: false
+  icon:
+  mac: E4:F8:EF:13:ED:05
+  name: android-900eab9821a0273d
+  picture:
+  track: false
+  vendor: Samsung Electronics Co.,Ltd
+
+hal9001:
+  hide_if_away: false
+  icon:
+  mac: D4:3D:7E:50:35:F6
+  name: HAL9001
+  picture:
+  track: false
+  vendor: Micro-Star Int'l Co, Ltd
+
+hassio:
+  hide_if_away: false
+  icon:
+  mac: B8:27:EB:E2:FB:A1
+  name: HASSIO
+  picture:
+  track: false
+  vendor: Raspberry Pi Foundation
+
+5ccf7fa7c749:
+  hide_if_away: false
+  icon:
+  mac: 5C:CF:7F:A7:C7:49
+  name: --
+  picture:
+  track: false
+  vendor: Espressif Inc.
+
+5ccf7fa6f60c:
+  hide_if_away: false
+  icon:
+  mac: 5C:CF:7F:A6:F6:0C
+  name: --
+  picture:
+  track: false
+  vendor: Espressif Inc.
+
+5ccf7ff4f98c:
+  hide_if_away: false
+  icon:
+  mac: 5C:CF:7F:F4:F9:8C
+  name: --
+  picture:
+  track: false
+  vendor: Espressif Inc.
+
+5ccf7fa7f970:
+  hide_if_away: false
+  icon:
+  mac: 5C:CF:7F:A7:F9:70
+  name: --
+  picture:
+  track: false
+  vendor: Espressif Inc.
+
+5ccf7fa741fe:
+  hide_if_away: false
+  icon:
+  mac: 5C:CF:7F:A7:41:FE
+  name: --
+  picture:
+  track: false
+  vendor: Espressif Inc.
+
+7cdd90067f56:
+  hide_if_away: false
+  icon:
+  mac: 7C:DD:90:06:7F:56
+  name: --
+  picture:
+  track: false
+  vendor: Shenzhen Ogemray Technology Co., Ltd.
+
+001518018131:
+  hide_if_away: false
+  icon:
+  mac: 00:15:18:01:81:31
+  name: --
+  picture:
+  track: false
+  vendor: Shenzhen 10MOONS Technology Development CO.,Ltd
+
+14bb6e560843:
+  hide_if_away: false
+  icon:
+  mac: 14:BB:6E:56:08:43
+  name: --
+  picture:
+  track: false
+  vendor: Samsung Electronics Co.,Ltd
+
+androide3ccf6688f47bff3:
+  hide_if_away: false
+  icon:
+  mac: FC:19:10:DF:7F:41
+  name: android-e3ccf6688f47bff3
+  picture:
+  track: false
+  vendor: Samsung Electronics Co.,Ltd
+
+d013fd300d6e:
+  hide_if_away: false
+  icon:
+  mac: D0:13:FD:30:0D:6E
+  name: --
+  picture:
+  track: false
+  vendor: LG Electronics (Mobile Communications)
+
+androidfeedb64db0e8ac04:
+  hide_if_away: false
+  icon:
+  mac: 00:E0:4C:81:93:D1
+  name: android-feedb64db0e8ac04
+  picture:
+  track: false
+  vendor: REALTEK SEMICONDUCTOR CORP.
+
+androidea18d75827c11c7d:
+  hide_if_away: false
+  icon:
+  mac: 34:69:87:D6:D8:EC
+  name: android-ea18d75827c11c7d
+  picture:
+  track: true
+  vendor: zte corporation
+
+bc60a7fa6e2d:
+  hide_if_away: false
+  icon:
+  mac: BC:60:A7:FA:6E:2D
+  name: --
+  picture:
+  track: true
+  vendor: Sony Interactive Entertainment Inc.
+
+galaxys6:
+  hide_if_away: false
+  icon:
+  mac: EC:9B:F3:A2:25:11
+  name: Galaxy-S6
+  picture:
+  track: true
+  vendor: SAMSUNG ELECTRO-MECHANICS(THAILAND)
+
+f877b8436cb1:
+  hide_if_away: false
+  icon:
+  mac: F8:77:B8:43:6C:B1
+  name: --
+  picture:
+  track: true
+  vendor: Samsung Electronics Co.,Ltd
+
+androidc7c602d5ec1ebbe1:
+  hide_if_away: false
+  icon:
+  mac: 3C:CF:5B:B1:DB:9A
+  name: android-c7c602d5ec1ebbe1
+  picture:
+  track: true
+  vendor: ICOMM HK LIMITED
+
+androidfe92e8c73980c819:
+  hide_if_away: false
+  icon:
+  mac: 00:E0:4C:81:9E:0B
+  name: android-fe92e8c73980c819
+  picture:
+  track: true
+  vendor: REALTEK SEMICONDUCTOR CORP.
+
+0026f2fdb26b:
+  hide_if_away: false
+  icon:
+  mac: 00:26:F2:FD:B2:6B
+  name: --
+  picture:
+  track: true
+  vendor: NETGEAR
+
+xboxone_2:
+  hide_if_away: false
+  icon:
+  mac: 94:9A:A9:AD:7A:B6
+  name: XboxOne
+  picture:
+  track: true
+  vendor: Microsoft Corporation
+
+scarlett_2:
+  hide_if_away: false
+  icon:
+  mac: 20:E5:17:03:59:D7
+  name: Scarlett
+  picture:
+  track: true
+  vendor: unknown
+
+desktophu1cofi:
+  hide_if_away: false
+  icon:
+  mac: 00:87:12:09:86:40
+  name: DESKTOP-HU1COFI
+  picture:
+  track: true
+  vendor: unknown
+
+raspberrypi:
+  hide_if_away: false
+  icon:
+  mac: B8:27:EB:07:18:DB
+  name: raspberrypi
+  picture:
+  track: true
+  vendor: Raspberry Pi Foundation
+
+stoffelsurface:
+  hide_if_away: false
+  icon:
+  mac: C0:33:5E:EA:D1:7D
+  name: Stoffel-Surface
+  picture:
+  track: true
+  vendor: Microsoft

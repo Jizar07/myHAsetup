@@ -10,6 +10,9 @@
 - platform: owntracks
   cd max_gps_accuracy: 200
   waypoints: true
+  waypoint_whitelist:
+    - jizar
+    - nil
 
 ############################################################
 
@@ -17,4 +20,10 @@
   host: 192.168.1.1
   username: !secret nguser
   password: !secret ngpass
-  track_new_devices: yes
+  track_new_devices: no
+  
+- platform: mqtt
+  devices:
+    jizar_jizar: /location/jizar
+    jizar_nil: /location/nil
+    scarlett: /location/scarlett

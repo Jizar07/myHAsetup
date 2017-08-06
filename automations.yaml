@@ -28,6 +28,10 @@
       entity_id: alarm_control_panel.stoffels_alarm
     - service: switch.turn_on
       entity_id: switch.siren
+    - service: tts.google_say
+      entity_id: media_player.home
+      data:
+        message: Alarm Armed
 #
 ##################################################################################
 ###############################   ALARM IN HOME   ################################
@@ -53,6 +57,10 @@
       entity_id: alarm_control_panel.stoffels_alarm
     - service: switch.turn_on
       entity_id: switch.siren
+    - service: tts.google_say
+      entity_id: media_player.home
+      data:
+        message: Alarm Armed for in home use
 #
 ##################################################################################
 #########################   LIGHT FLASH / SIREN ON   #############################
@@ -69,6 +77,10 @@
       entity_id:
         - script.light_flash
         - script.siren
+    - service: notify.jizar
+      data:
+        title: Alarm Triggered
+        message: The alarm is on
 #
 ##################################################################################
 #########################   LIGHT FLASH / SIREN OFF   ############################
@@ -89,6 +101,14 @@
         - script.siren
     - service: switch.turn_off
       entity_id: switch.siren
+    - service: notify.jizar
+      data:
+        title: Alarm Disarmed
+        message: The alarm is Disarmed
+    - service: tts.google_say
+      entity_id: media_player.home
+      data:
+        message: Alarm Disarmed
 #
 ##################################################################################
 #################################### BACK DOOR ###################################
@@ -105,10 +125,6 @@
       entity_id: alarm_control_panel.stoffels_alarm
       state: disarmed
   action:
-    - service: media_player.volume_set
-      data:
-        entity_id: media_player.home
-        volume_level: 50
     # - service: media_player.play_media
       # data:
         # entity_id: media_player.home
@@ -179,25 +195,43 @@
     service: tts.google_say
     entity_id: media_player.home
     data_template:
-      message: "You got Mail"
+     message: "You got {{ states.sensor.deliveries_today.state }} Mail"
 #
 ##################################################################################
 ####################################  TIMERS  ####################################
 ##################################################################################
-
+#
+- alias: hourly
+  trigger:
+  - platform: time
+    minutes: 00
+    seconds: 00
+  condition:
+    condition: time
+    after: '08:00:00'
+    before: '22:00:00'
+  action:
+  - service: media_player.play_media
+    data_template:
+      entity_id: media_player.home
+      media_content_id: /local/waves/chime{{now().strftime("%I")}}.wav
+      media_content_type: music
+  - service: tts.google_say
+    entity_id: media_player.home
+    data_template:
+      message: Its {{now().strftime("%I %p")}}
+      cache: true
+  - delay: '00:00:26'
+#
 - alias: 10 PM
   trigger:
   - platform: time
     at: '22:00:00'
   action:
-  - service: media_player.volume_set
-    data:
-      entity_id: media_player.home
-      volume_level: 50
   - service: tts.google_say
     entity_id: media_player.home
     data:
-      message: It's 10 pm master, Starting Sleep mode.
+      message: It's 10 pm, Starting Sleep mode.
   - service: light.turn_off
     entity_id:
     - light.laundry
@@ -205,23 +239,21 @@
   - service: light.turn_on
     entity_id: light.hallway
     data:
-      brightness: 50
+      brightness: 125
   - service: switch.turn_off
     entity_id:
     - switch.blue_rope
     - switch.red_rope
     - switch.dinning_room
     - switch.kitchen
+    - light.laundry
+    - light.boys_room
 #
 - alias: 7:30 am
   trigger:
   - platform: time
-    at: 07:00:00
+    at: 07:30:00
   action:
-  - service: media_player.volume_set
-    data:
-      entity_id: media_player.home
-      volume_level: 100
   - service: tts.google_say
     entity_id: media_player.home
     data:
@@ -231,8 +263,10 @@
     - light.hallway
   - service: switch.turn_on
     entity_id:
-    - switch.kitchen
-    - switch.51
+    #- switch.kitchen
+    - switch.gameroom
+    - switch.boys_tv
+    - switch.scarlett
 #
 - alias: Boys TV
   trigger:
@@ -242,6 +276,8 @@
   - service: switch.turn_off
     entity_id:
     - switch.boys_tv
+    - switch.gameroom
+    - switch.scarlett
 #
 ##################################################################################
 ####################################  CAMERAS  ###################################
@@ -290,20 +326,7 @@
       entity_id: switch.kitchen
     - service: light.turn_off
       entity_id: light.laundry
-#
-##################################################################################
-##################################   UPDATER   ###################################
-##################################################################################
 
-- alias: Update
-  trigger:
-    - platform: state
-      entity_id: updater.updater
-  action:
-    service: tts.google_say
-    entity_id: media_player.home
-    data_template:
-      message: Update for Home Assistant  {{ states.updater.updater.state }}  is now available.
 #
 ##################################################################################
 ##################################     TEMP    ###################################
@@ -313,21 +336,17 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.motion_sensor_temperature
-      above: 83
+      above: 84
   action:
-  - service: media_player.volume_set
-    data:
-      entity_id: media_player.home
-      volume_level: 100
   - service: tts.google_say
     entity_id: media_player.home
     data_template:
-      message: AC not working, The Temperature is  {{ states.sensor.motion_sensor_temperature.state }} degrees and rising.
+      message: The Temperature is  {{ states.sensor.motion_sensor_temperature.state }} degrees. Please check the AC for problems.
 - alias: tempup
   trigger:
     - platform: numeric_state
       entity_id: sensor.motion_sensor_temperature
-      above: 81
+      above: 82
   action:
     service: tts.google_say
     entity_id: media_player.home
@@ -349,4 +368,123 @@
     data_template:
         message: The Temperature is now {{ states.sensor.motion_sensor_temperature.state }} degrees.
         
-#
+#      
+- alias: zones
+  trigger:
+  - platform: zone
+    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    zone: zone.bschool
+    event: enter
+  - platform: zone
+    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    zone: zone.sschool
+    event: enter
+  - platform: zone
+    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    zone: zone.home
+    event: enter
+  - platform: zone
+    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    zone: zone.dina
+    event: enter
+  - platform: zone
+    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    zone: zone.joan
+    event: enter
+  - platform: zone
+    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    zone: zone.connie
+    event: enter
+  - platform: zone
+    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    zone: zone.connieapt
+    event: enter
+  - platform: zone
+    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    zone: zone.janice
+    event: enter
+  - platform: zone
+    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    zone: zone.leona
+    event: enter
+  - platform: zone
+    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    zone: zone.lisa
+    event: enter
+  - platform: zone
+    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    zone: zone.diane
+    event: enter
+  - platform: zone
+    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    zone: zone.kelly
+    event: enter
+  - platform: zone
+    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    zone: zone.alison
+    event: enter
+  - platform: zone
+    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    zone: zone.evelin
+    event: enter
+############################### LEAVE ##############################
+  - platform: zone
+    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    zone: zone.bschool
+    event: leave
+  - platform: zone
+    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    zone: zone.sschool
+    event: leave
+  - platform: zone
+    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    zone: zone.home
+    event: leave
+  - platform: zone
+    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    zone: zone.dina
+    event: leave
+  - platform: zone
+    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    zone: zone.joan
+    event: leave
+  - platform: zone
+    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    zone: zone.connie
+    event: leave
+  - platform: zone
+    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    zone: zone.connieapt
+    event: leave
+  - platform: zone
+    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    zone: zone.janice
+    event: leave
+  - platform: zone
+    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    zone: zone.leona
+    event: leave
+  - platform: zone
+    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    zone: zone.lisa
+    event: leave
+  - platform: zone
+    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    zone: zone.diane
+    event: leave
+  - platform: zone
+    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    zone: zone.kelly
+    event: leave
+  - platform: zone
+    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    zone: zone.alison
+    event: leave
+  - platform: zone
+    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    zone: zone.evelin
+    event: leave
+  action:     
+  - service: notify.jizar
+    data_template:
+      message: "{{ trigger.to_state.name }} is in {{ trigger.to_state.state }}"

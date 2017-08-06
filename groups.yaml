@@ -1,63 +1,46 @@
+# 1
 default_view:
   view: true
+  name: Default View
   icon: mdi:home
   entities:
   - sun.sun
+  - sensor.ram_free
+  - sensor.aeotec_dsb09104_home_energy_meter_energy
   - sensor.yr_symbol
   - sensor.motion_sensor_temperature
-  - sensor.cpu
   - sensor.speedtest_download
+  - group.time
+  - group.tracker
   - group.deliveries
-  - device_tracker.jizar_jizar
-  - device_tracker.jizar_nil
   - group.alarm
   - alarm_control_panel.stoffels_alarm
   - group.lights
   - group.switches
-#
-#################################################################################
-#################################      VIEWS       ##############################
-#################################################################################
-#
-alarm_view:
-  view: true
-  name: Alarm System
-  icon: mdi:alarm-light
-  entities:
-  - group.alarm
-automations_view:
-  view: true
-  name: Automations
-  icon: mdi:home-automation
-  entities:
-  - group.automations
-  - script.temperature
+# 2
 camera_view:
   view: true
   name: Cameras
   icon: mdi:cctv
   entities:
-  - group.camera
   - group.image_processing
   - microsoft_face.stoffels
+  - group.cameras
+  - group.maps
+# 3
 lights_view:
   view: true
   icon: mdi:lightbulb
   name: Lights
   entities:
   - group.lights
+  - group.switches
 players_view:
   view: true
   name: Media Players
   icon: mdi:play
   entities:
   - group.players
-# remote_view:
-  # view: true
-  # name: Remotes
-  # icon: mdi:remote
-  # entities:
-  # - group.remotes
 Family_room_view:
   view: true
   name: Family Room
@@ -76,52 +59,30 @@ bedrooms_view:
   name: Family Room
   icon: mdi:hotel
   entities:
-  - switch.master
+  - switch.scarlett
   - light.master
   - light.boys_room
   - switch.boys_tv
-# sensors_view:
-  # view: true
-  # name: Sensors
-  # icon: mdi:wifi
-  # entities:
-  # - sun.sun
-  # - sensor.yr_symbol
-  # - sensor.motion_sensor_temperature
-  # - sensor.fastcom_download
-  # - cover.garage_door
-
-#
-#################################################################################
-##################################     GROUPS      ##############################
-#################################################################################
-#
-lights:
-  name: Lights
-  icon: mdi:lightbuld-outline
+power_view:
+  view: true
+  name: Power Meter
+  icon: mdi:power-settings
   entities:
-  - light.boys_room
-  - light.master
-  - light.hallway
-  - light.laundry
-  - switch.dinning_room
-  - switch.kitchen
-  - switch.red_rope
-  - switch.blue
-  - switch.front_of_the_house
-  - light.backyard
-switches:
-  name: Switches
-  icon: mdi:dip-switch
+  - group.energy_meter
+  - group.energy
+  - group.power
+  - group.interval
+automations_view:
+  view: true
+  name: Automations
+  icon: mdi:home-automation
   entities:
-  - switch.boys_tv
-  - switch.computer
-  - switch.master
-remotes:
-  name: Remotes
-  icon: mdi:remote
-  entities:
-  - remote.harmony_hub
+  - group.automations
+  - script.temperature
+#################################################################################################
+############################################# GROUPS ############################################
+#################################################################################################
+# A
 alarm:
   name: Alarm System
   icon: mdi:alarm-light
@@ -136,57 +97,12 @@ alarm:
   - automation.flash_lights
   - automation.detection
   - automation.disarm
-  view: false
-camera:
-  name: Cameras
-  icon: mdi:cctv
-  entities:
-  - camera.ip_camera
-  - camera.foscam
-  - camera.gameroom_pc
-  - camera.mycam
-  - camera.nilzete
-  - camera.jizar
-image_processing:
-  name: Image Processors
-  icon: mdi:face
-  entities:
-family_room:
-  name: Family Room
-  icon: mdi:sofa
-  entities:
-  - switch.blue_rope
-  - switch.red_rope
-  - remote.harmony_hub
-  - media_player.mastercast
-  - media_player.home
-  - device_tracker.tv_un60ju7090
-players:
-  name: Media Players
-  icon: mdi:play
-  entities:
-  - media_player.home
-  - media_player.daddys_kodi
-  - media_player.scarletts_kodi
-  - media_player.mastercast
-  - media_player.samsung_led32_un32j5303
-  - media_player.samsung_led40_un40j5200
-  - media_player.un60ju7090_un60ju7090
-  - media_player.4k_tv_60
-  - media_player.samsung_tv_remote
-sensors:
-  name: Sensors
-  icon: mdi:wifi
-  entities:
-  - sun.sun
-  - sensor.yr_symbol
-  - sensor.motion_sensor_temperature
-  - sensor.fastcom_download
-  - cover.garage_door
 automations:
   name: Automations
   icon: mdi:home-automation
   entities:
+  - automation.zones
+  - automation.hourly
   - automation.alarm_away
   - automation.alarm_home
   - automation.flash_lights
@@ -200,12 +116,153 @@ automations:
   - automation.garage_door_closed
   - automation.garage_door_open
   - automation.mycam
-  - automation.ipcam  
+  - automation.ipcam
   - automation.noac
   - automation.tempup
   - automation.tempdown
   - automation.update
   - automation.delivery
+# B
+binary_sensor:
+  name: Binary Sensors
+  icon: mdi:wifi
+  entities:
+  - binary_sensor.front_door_opened
+  - binary_sensor.motion_sensor_motion
+  - binary_sensor.patio_door_opened
+  - binary_sensor.philips_hue_2
+  - binary_sensor.wink_hub_2
+# C
+cameras:
+  name: Cameras
+  icon: mdi:cctv
+  entities:
+  - camera.main_area
+  - camera.ip_camera
+climate:
+  name: Climate
+  icon: mdi:climate
+  entities:
+  - sensor.motion_sensor_temperature
+# D
+Deliveries:
+  - sensor.usps_mail
+  - sensor.usps_packages
+  - sensor.ups
+  - sensor.fedex
+  - sensor.deliveries_today
+  - sensor.packages_in_transit
+# E
+energy_meter:
+  name: Energy Meter
+  icon: mdi:power
+  entities:
+  - zwave.aeotec_dsb09104_home_energy_meter
+  - zwave.aeotec_zw090_zstick_gen5_us
+  - sensor.aeotec_dsb09104_home_energy_meter_interval
+  - sensor.aeotec_dsb09104_home_energy_meter_interval_2
+  - sensor.aeotec_dsb09104_home_energy_meter_interval_3
+  - sensor.aeotec_dsb09104_home_energy_meter_power
+  - sensor.aeotec_dsb09104_home_energy_meter_power_2
+  - sensor.aeotec_dsb09104_home_energy_meter_power_3
+  - sensor.aeotec_dsb09104_home_energy_meter_power_4
+  - sensor.aeotec_dsb09104_home_energy_meter_power_5
+  - sensor.aeotec_dsb09104_home_energy_meter_power_6
+  - sensor.aeotec_dsb09104_home_energy_meter_energy_2
+  - sensor.aeotec_dsb09104_home_energy_meter_energy_3
+  - sensor.aeotec_dsb09104_home_energy_meter_energy
+  - sensor.aeotec_dsb09104_home_energy_meter_previous_Reading_2
+  - sensor.aeotec_dsb09104_home_energy_meter_previous_Reading_3
+  - sensor.aeotec_dsb09104_home_energy_meter_previous_Reading
+# F
+family_room:
+  name: Family Room
+  icon: mdi:sofa
+  entities:
+  - switch.blue_rope
+  - switch.red_rope
+  - remote.harmony_hub
+  - media_player.mastercast
+  - media_player.home
+  - device_tracker.tv_un60ju7090
+# G
+# H
+# I
+image_processing:
+  name: Image Processors
+  icon: mdi:face
+  entities:
+# J
+# K
+# L
+lights:
+  name: Lights
+  icon: mdi:lightbuld-outline
+  entities:
+  - light.boys_room
+  - light.master
+  - light.hallway
+  - light.laundry
+  - switch.dinning_room
+  - switch.kitchen
+  - switch.red_rope
+  - switch.blue
+  - switch.front_of_the_house
+  - light.backyard
+# M
+maps:
+  name: Maps
+  icon: mdi:map
+  entities:
+  - camera.nilzete_map
+  - camera.jizar_map
+# N
+# O
+# P
+players:
+  name: Media Players
+  icon: mdi:play
+  entities:
+  - media_player.plex
+  - media_player.home
+  - media_player.4k_tv_60
+  - media_player.daddys_kodi
+  - media_player.scarletts_kodi
+  - media_player.mastercast
+  - media_player.samsung_led32_un32j5303
+  - media_player.samsung_led40_un40j5200
+# Q
+# R
+remotes:
+  name: Remotes
+  icon: mdi:remote
+  entities:
+  - remote.harmony_hub
+# S
+sensors:
+  name: Sensors
+  icon: mdi:wifi
+  entities:
+  - sun.sun
+  - sensor.yr_symbol
+  - sensor.motion_sensor_temperature
+  - sensor.fastcom_download
+  - cover.garage_door
+switches:
+  name: Switches
+  icon: mdi:dip-switch
+  entities:
+  - switch.boys_tv
+  - switch.gameroom
+  - switch.scarlett
+  - switch.siren
+# T
+time:
+  name: Time
+  icon: mdi:clock
+  entities:
+  - sensor.time
+  - sensor.date
 topsensors:
   name: Top Sensors
   icon: mdi:white-balance-iridescent
@@ -216,10 +273,16 @@ topsensors:
   - sun.sun
   - device_tracker.jizar_jizar
   - device_tracker.jizar_nil
-Deliveries:
-  - sensor.usps_mail
-  - sensor.usps_packages
-  - sensor.ups
-  - sensor.fedex
-  - sensor.deliveries_today
-  - sensor.packages_in_transit
+tracker:
+  name: Trackers
+  icon: mdi:map
+  entities:
+  - sensor.nil
+  - sensor.scarlett
+  - sensor.jizar
+# U
+# V
+# X
+# W
+# Y
+# Z

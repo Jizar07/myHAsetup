@@ -1,0 +1,3 @@
+zwave.aeotec_dsb09104_home_energy_meter:
+  ignored: false
+  polling_intensity: 1
