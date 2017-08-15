@@ -8,19 +8,17 @@
 ########################  My phone  #######################
 
 - platform: owntracks
-  cd max_gps_accuracy: 200
+  cd max_gps_accuracy: 100
   waypoints: true
-  waypoint_whitelist:
-    - jizar
-    - nil
 
 ############################################################
 
 - platform: netgear
   host: 192.168.1.1
+  port: 80
   username: !secret nguser
   password: !secret ngpass
-  track_new_devices: no
+  track_new_devices: false
   
 - platform: mqtt
   devices:

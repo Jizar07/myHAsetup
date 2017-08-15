@@ -28,10 +28,6 @@
       entity_id: alarm_control_panel.stoffels_alarm
     - service: switch.turn_on
       entity_id: switch.siren
-    - service: tts.google_say
-      entity_id: media_player.home
-      data:
-        message: Alarm Armed
 #
 ##################################################################################
 ###############################   ALARM IN HOME   ################################
@@ -57,10 +53,6 @@
       entity_id: alarm_control_panel.stoffels_alarm
     - service: switch.turn_on
       entity_id: switch.siren
-    - service: tts.google_say
-      entity_id: media_player.home
-      data:
-        message: Alarm Armed for in home use
 #
 ##################################################################################
 #########################   LIGHT FLASH / SIREN ON   #############################
@@ -80,7 +72,7 @@
     - service: notify.jizar
       data:
         title: Alarm Triggered
-        message: The alarm is on
+        message: The alarm in the is on
 #
 ##################################################################################
 #########################   LIGHT FLASH / SIREN OFF   ############################
@@ -104,11 +96,7 @@
     - service: notify.jizar
       data:
         title: Alarm Disarmed
-        message: The alarm is Disarmed
-    - service: tts.google_say
-      entity_id: media_player.home
-      data:
-        message: Alarm Disarmed
+        message: The alarm in the is Disarmed
 #
 ##################################################################################
 #################################### BACK DOOR ###################################
@@ -231,7 +219,7 @@
   - service: tts.google_say
     entity_id: media_player.home
     data:
-      message: It's 10 pm, Starting Sleep mode.
+      message: It's 10 pm master, Starting Sleep mode.
   - service: light.turn_off
     entity_id:
     - light.laundry
@@ -239,15 +227,13 @@
   - service: light.turn_on
     entity_id: light.hallway
     data:
-      brightness: 125
+      brightness: 50
   - service: switch.turn_off
     entity_id:
     - switch.blue_rope
     - switch.red_rope
     - switch.dinning_room
     - switch.kitchen
-    - light.laundry
-    - light.boys_room
 #
 - alias: 7:30 am
   trigger:
@@ -263,22 +249,65 @@
     - light.hallway
   - service: switch.turn_on
     entity_id:
-    #- switch.kitchen
-    - switch.gameroom
-    - switch.boys_tv
-    - switch.scarlett
+    - switch.kitchen
+    - switch.51
 #
 - alias: Boys TV
   trigger:
   - platform: time
-    at: '23:00:00'
+    at: '22:00:00'
+  condition:
+    condition: time
+    after: "22:00:00"
+    before: "23:30:00"
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - sun
   action:
   - service: switch.turn_off
     entity_id:
     - switch.boys_tv
-    - switch.gameroom
-    - switch.scarlett
 #
+- alias: Scarlett
+  trigger:
+  - platform: time
+    at: '23:00:00'
+  condition:
+    condition: time
+    after: "22:00:00"
+    before: "23:30:00"
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - sun
+  action:
+  - service: switch.turn_off
+    entity_id:
+    - switch.master
+#
+- alias: Boys Alarm
+  trigger:
+  - platform: time
+    at: '06:15:00'
+  condition:
+    condition: time
+    after: "05:00:00"
+    before: "07:00:00"
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+  action:
+  - service: light.turn_on
+    entity_id:
+    - switch.boys_room
 ##################################################################################
 ####################################  CAMERAS  ###################################
 ##################################################################################
@@ -368,7 +397,10 @@
     data_template:
         message: The Temperature is now {{ states.sensor.motion_sensor_temperature.state }} degrees.
         
-#      
+#
+##################################################################################
+################################     TRACKING    #################################
+##################################################################################     
 - alias: zones
   trigger:
   - platform: zone

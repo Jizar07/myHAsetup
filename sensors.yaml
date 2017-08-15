@@ -71,26 +71,19 @@
 
 - platform: google_geocode
   name: Nil
-  api_key: !secret nilkey
+  #api_key: !secret nilkey
   origin: device_tracker.jizar_nil
   options: both
+  display_zone: show
 - platform: google_geocode
   name: Jizar
-  api_key: !secret jizarkey
+  #api_key: !secret jizarkey
   origin: device_tracker.jizar_jizar
   options: both
+  display_zone: show
 - platform: google_geocode
   name: Scarlett
-  api_key: !secret jizarkey
+  #api_key: !secret jizarkey
   origin: device_tracker.scarlett
   options: both
-#
-################################### PLEX #############################
-#
-- platform: plex
-  host: 192.168.1.28
-  port: 32400
-  name: Plex
-  username: !secret plexuser
-  password: !secret plexpass
-  server: plex
+  display_zone: show

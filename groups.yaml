@@ -3,7 +3,7 @@ default_view:
   view: true
   name: Default View
   icon: mdi:home
-  entities:
+  entities: 
   - sun.sun
   - sensor.ram_free
   - sensor.aeotec_dsb09104_home_energy_meter_energy
@@ -59,7 +59,7 @@ bedrooms_view:
   name: Family Room
   icon: mdi:hotel
   entities:
-  - switch.scarlett
+  - switch.master
   - light.master
   - light.boys_room
   - switch.boys_tv
@@ -122,6 +122,8 @@ automations:
   - automation.tempdown
   - automation.update
   - automation.delivery
+  - automation.boys_alarm
+  - automation.scarlett
 # B
 binary_sensor:
   name: Binary Sensors
@@ -223,7 +225,6 @@ players:
   name: Media Players
   icon: mdi:play
   entities:
-  - media_player.plex
   - media_player.home
   - media_player.4k_tv_60
   - media_player.daddys_kodi
@@ -253,8 +254,8 @@ switches:
   icon: mdi:dip-switch
   entities:
   - switch.boys_tv
-  - switch.gameroom
-  - switch.scarlett
+  - switch.computer
+  - switch.master
   - switch.siren
 # T
 time:

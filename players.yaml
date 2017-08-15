@@ -3,16 +3,16 @@
 ##########################################################
 
 #Family Room
-- platform: kodi
-  name: Daddy's Kodi
-  host: 192.168.1.100
-  port: 8085
+# - platform: kodi
+  # name: Daddy's Kodi
+  # host: 192.168.1.100
+  # port: 8085
   
 
 #Scarlett
-- platform: kodi
-  host: 192.168.1.28
-  name: Scarlett's Kodi
+# - platform: kodi
+  # host: 192.168.1.28
+  # name: Scarlett's Kodi
 #
 ##########################################################
 ########################   TVS   #########################
@@ -22,21 +22,6 @@
 - platform: cast
 
 # SMART 4K TV
-- platform: samsungtv
-  host: 192.168.1.101
-  name: 4K TV 60
-  
-  
-# PLEX
-- platform: plex
-  ip_address: 192.168.1.28
-  port: 32400
-  # token: !secret plextoken
-  # ssl: true
-  # verify: false
-  entity_namespace: 'plex'
-  include_non_clients: true
-  scan_interval: 5
-  show_all_controls: false
-  use_custom_entity_ids: true
-  use_episode_art: true
+# - platform: samsungtv
+  # host: 192.168.1.101
+  # name: 4K TV 60

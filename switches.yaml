@@ -12,7 +12,7 @@
 
 ## 52
 - platform: mqtt
-  name: 'Scarlett'
+  name: 'master'
   icon: mdi:ceiling-light
   state_topic: "stat/master/POWER"
   command_topic: "cmnd/master/power"
@@ -42,7 +42,7 @@
   retain: true
 ## 55
 - platform: mqtt
-  name: 'Gameroom'
+  name: 'Computer'
   icon: mdi:desktop-classic
   state_topic: "stat/computer/POWER"
   command_topic: "cmnd/computer/power"

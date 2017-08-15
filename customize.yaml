@@ -181,6 +181,7 @@
  
   switch.blue:
     emulated_hue: true
+    emulated_hue_name: "Blue light"
     friendly_name: Blue Rope
     icon: mdi:blur-linear
     custom_ui_state_card: custom-ui
@@ -188,6 +189,7 @@
 #
   switch.red_rope:
     emulated_hue: true
+    emulated_hue_name: "Red light"
     friendly_name: Red Rope
     icon: mdi:blur-linear
     custom_ui_state_card: custom-ui
@@ -195,13 +197,13 @@
 #
   switch.boys_tv:
     emulated_hue: true
+    emulated_hue_name: "Boy's Tv"
     friendly_name: Boy's TV
     icon: mdi:television
     custom_ui_state_card: custom-ui
     show_last_changed: true
 #
   switch.front_of_the_house:
-    emulated_hue: true
     friendly_name: Driveway / Front Door
     icon: mdi:theme-light-dark
     custom_ui_state_card: custom-ui
@@ -209,13 +211,13 @@
 #
   switch.computer:
     emulated_hue: true
+    emulated_hue_name: "Gameroom"
     friendly_name: Gameroom PC
     icon: mdi:desktop-classic
     custom_ui_state_card: custom-ui
     show_last_changed: true
 #
   switch.kitchen:
-    emulated_hue: true
     friendly_name: Kitchen
     icon: mdi:ceiling-light
     custom_ui_state_card: custom-ui
@@ -223,6 +225,7 @@
 #
   switch.dinning_room:
     emulated_hue: true
+    emulated_hue_name: "Dinning Room"
     friendly_name: Dinning Room
     icon: mdi:ceiling-light
     custom_ui_state_card: custom-ui
@@ -230,6 +233,7 @@
 #
   switch.master:
     emulated_hue: true
+    emulated_hue_name: "Scarlett's TV"
     friendly_name: Scarlett's TV
     icon: mdi:television
     custom_ui_state_card: custom-ui

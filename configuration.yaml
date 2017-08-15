@@ -10,35 +10,31 @@ homeassistant:
 #################################################################################
 ####################################   DEFAULTS   ###############################
 #################################################################################
-hassio:
-shopping_list:
+
 config:
 updater:
+discovery:
 conversation:
 history:
 logbook:
 sun:
-discovery:
-media_extractor:
-upnp:
-  port_mapping: false
 
 #################################################################################
 ####################################   INCLUDES   ###############################
 #################################################################################
 
-zone: !include zones.yaml
-#group: !include groups.yaml
 automation: !include automations.yaml
-sensor: !include sensors.yaml
+camera: !include cameras.yaml
 device_tracker: !include devicetracker.yaml
-switch: !include switches.yaml
-script: !include scripts.yaml
+group: !include groups.yaml
+#image_processing: !include imgpro.yaml
 media_player: !include players.yaml
 panel_iframe: !include panels.yaml
-camera: !include cameras.yaml
-#image_processing: !include imgpro.yaml
+script: !include scripts.yaml
+sensor: !include sensors.yaml
 #shell_command: !include shellcommand.yaml
+switch: !include switches.yaml
+zone: !include zones.yaml
 
 #################################################################################
 ####################################   CUSTOMS    ###############################
@@ -50,23 +46,21 @@ frontend:
      primary-color: "#6600cc"
    black:
      primary-color: black
+#
 zwave:
   usb_path: /dev/ttyACM0
 #
 tts:
   - platform: google
-    cache: true
-    cache_dir: /tmp/tts
-    time_memory: 300
+    # cache: true
+    # cache_dir: /tmp/tts
+    # time_memory: 300
 #
 http:
-  api_password: !secret api_password
-  ssl_certificate: /ssl/fullchain.pem
-  ssl_key: /ssl/privkey.pem
-  base_url: !secret base_url
-  trusted_networks: 192.168.1.0/24
-  ip_ban_enabled: true
-  login_attempts_threshold: 1
+  # api_password: !secret api_password
+  # ssl_certificate: /ssl/fullchain.pem
+  # ssl_key: /ssl/privkey.pem
+  # base_url: !secret base_url 
 
 #
 mqtt:
@@ -82,23 +76,18 @@ wink:
 alarm_control_panel:
   - platform: manual
     name: Stoffel's Alarm
-    code: !secret code
+   # code: !secret alarmcode
     pending_time: 5
     trigger_time: 5
     disarm_after_trigger: false
 #
 ifttt:
   key: !secret ifttt_key
-#
 
-# microsoft_face:  ##########################  QUOTA REACHED -  WAIT FOR BETTER OPTIONS  #################
-  # api_key: !secret api_key
-  # azure_region: eastus2
-
-emulated_hue:
-  host_ip: 192.168.1.41
-  listen_port: 80
 notify:
   - platform: pushbullet
     name: Jizar
     api_key: !secret pushbulletapi
+#
+# emulated_hue:
+  # listen_port: 80

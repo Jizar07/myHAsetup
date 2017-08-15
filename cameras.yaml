@@ -1,0 +1,29 @@
+# FosCam
+- platform: mjpeg
+  mjpeg_url: !secret foscam
+  name: IP Camera
+  icon: mdi:cctv
+#
+# WansView
+- platform: generic
+  still_image_url: !secret wansview
+  username: !secret username
+  password: !secret password
+  authentication: digest
+  name: Main Area
+ # { "person": "Jizar Stoffel", "group": "stoffels", "camera_entity": "camera.mycam" }
+ 
+##########################################################
+########################   MAPS  #########################
+##########################################################
+
+- platform: generic
+  still_image_url: !secret nilmap
+  limit_refetch_to_url_change: true
+  name: Nilzete map
+#
+- platform: generic
+  still_image_url: !secret jizarmap
+  limit_refetch_to_url_change: true
+  name: Jizar map
+#
