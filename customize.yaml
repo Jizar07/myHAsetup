@@ -107,7 +107,7 @@
 ######################## PLAYERS #########################
 ##########################################################
 
-  media_player.home:
+  media_player.google_assistant:
     friendly_name: Google Home
     icon: mdi:google-assistant
 #
@@ -116,7 +116,11 @@
     icon: mdi:cast   
 #
   media_player.un60ju7090_un60ju7090:
-    friendly_name: 4K TV 60
+    friendly_name: 4K UN60JU7090
+    icon: mdi:television
+#
+  media_player.samsung_led32_un32j5303:
+    friendly_name: Boys Tv
     icon: mdi:television
 #
   media_player.daddys_kodi:
@@ -126,10 +130,6 @@
   media_player.scarletts_kodi:
     friendly_name: Scarlett's Kodi
     icon: mdi:kodi
-#
-  media_player.4k_tv_60:
-    friendly_name: 4K TV 60
-    icon: mdi:television
 #
 ##########################################################
 ######################## LIGHTS  #########################
@@ -180,63 +180,63 @@
 ##########################################################
  
   switch.blue:
-    emulated_hue: true
-    emulated_hue_name: "Blue light"
+    # emulated_hue: true
+    # emulated_hue_name: "Blue light"
     friendly_name: Blue Rope
     icon: mdi:blur-linear
-    custom_ui_state_card: custom-ui
+    # custom_ui_state_card: custom-ui
     show_last_changed: true
 #
   switch.red_rope:
-    emulated_hue: true
-    emulated_hue_name: "Red light"
+    # emulated_hue: true
+    # emulated_hue_name: "Red light"
     friendly_name: Red Rope
     icon: mdi:blur-linear
-    custom_ui_state_card: custom-ui
+    # custom_ui_state_card: custom-ui
     show_last_changed: true
 #
   switch.boys_tv:
-    emulated_hue: true
-    emulated_hue_name: "Boy's Tv"
+    # emulated_hue: true
+    # emulated_hue_name: "Boy's Tv"
     friendly_name: Boy's TV
     icon: mdi:television
-    custom_ui_state_card: custom-ui
+    # custom_ui_state_card: custom-ui
     show_last_changed: true
 #
   switch.front_of_the_house:
     friendly_name: Driveway / Front Door
     icon: mdi:theme-light-dark
-    custom_ui_state_card: custom-ui
+    # custom_ui_state_card: custom-ui
     show_last_changed: true
 #
   switch.computer:
-    emulated_hue: true
-    emulated_hue_name: "Gameroom"
+    # emulated_hue: true
+    # emulated_hue_name: "Gameroom"
     friendly_name: Gameroom PC
     icon: mdi:desktop-classic
-    custom_ui_state_card: custom-ui
+    # custom_ui_state_card: custom-ui
     show_last_changed: true
 #
   switch.kitchen:
     friendly_name: Kitchen
     icon: mdi:ceiling-light
-    custom_ui_state_card: custom-ui
+    # custom_ui_state_card: custom-ui
     show_last_changed: true
 #
   switch.dinning_room:
-    emulated_hue: true
-    emulated_hue_name: "Dinning Room"
+    # emulated_hue: true
+    # emulated_hue_name: "Dinning Room"
     friendly_name: Dinning Room
     icon: mdi:ceiling-light
-    custom_ui_state_card: custom-ui
+    # custom_ui_state_card: custom-ui
     show_last_changed: true
 #
   switch.master:
-    emulated_hue: true
-    emulated_hue_name: "Scarlett's TV"
+    # emulated_hue: true
+    # emulated_hue_name: "Scarlett's TV"
     friendly_name: Scarlett's TV
     icon: mdi:television
-    custom_ui_state_card: custom-ui
+    # custom_ui_state_card: custom-ui
     show_last_changed: true
 
 ##########################################################
@@ -362,3 +362,35 @@
   camera.main_area:
     friendly_name: Main Area
     icon: mdi:webcam
+    
+
+  binary_sensor.floorplan:
+    custom_ui_state_card: floorplan
+    floorplan_image: /local/custom_ui/floorplan/floorplan.svg
+   # password: <password_goes_here>
+    stylesheet: /local/custom_ui/floorplan/floorplan.css
+    color_on: '#006600'
+    color_off: '#ffffff'
+    track_duration: 10
+    last_motion_entity: sensor.template_last_motion
+    entities:
+      - binary_sensor.motion_sensor_motion
+      - binary_sensor.patio_door_opened
+      - binary_sensor.front_door_opened
+      
+#######################################################################
+############################## WEATHER ################################
+#######################################################################
+
+  sensor.dark_sky_nearest_storm_distance:
+    friendly_name: Near Storm
+  sensor.dark_sky_summary:
+    friendly_name: Summary
+  sensor.dark_sky_temperature:
+    friendly_name: Outside Temp.
+  sensor.dark_sky_humidity:
+    friendly_name: Humidity
+  sensor.dark_sky_pressure:
+    friendly_name: Pressure
+  sensor.dark_sky_visibility:
+    friendly_name: Visibility

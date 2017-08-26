@@ -87,3 +87,44 @@
   origin: device_tracker.scarlett
   options: both
   display_zone: show
+  
+- platform: template
+  sensors:
+    template_last_motion:
+      friendly_name: 'Last Motion'
+      value_template: >
+        {%- set sensors = [states.binary_sensor.motion_sensor_motion] %}
+        {% for sensor in sensors %}
+          {% if as_timestamp(sensor.last_changed) == as_timestamp(sensors | map(attribute='last_changed') | max) %}
+            {{ sensor.name }}
+          {% endif %}
+        {% endfor %}
+    nilspin:
+      friendly_name: 'Nil Spinner'
+      value_template: '{{ states.device_tracker.jizar_nil.state }}'
+    jizarspin:
+      friendly_name: 'Jizar Spinner'
+      value_template: '{{ states.device_tracker.jizar_jizar.state }}'
+    nilspin2:
+      friendly_name: 'Nil Spinner2'
+      value_template: '{{ states.device_tracker.jizar_nil.state }}'
+    jizarspin2:
+      friendly_name: 'Jizar Spinner2'
+      value_template: '{{ states.device_tracker.jizar_jizar.state }}'
+    jizarcar:
+      friendly_name: 'Jizar car'
+      value_template: '{{ states.device_tracker.jizar_jizar.state }}'
+    nilcar:
+      friendly_name: 'Nil Car'
+      value_template: '{{ states.device_tracker.jizar_nil.state }}'
+        
+- platform: darksky
+  api_key: !secret darkskyapi
+  monitored_conditions:
+    - summary
+    - nearest_storm_distance
+    - wind_speed
+    - temperature
+    - humidity
+    - pressure
+    - visibility

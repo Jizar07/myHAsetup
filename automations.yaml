@@ -113,13 +113,13 @@
       entity_id: alarm_control_panel.stoffels_alarm
       state: disarmed
   action:
-    # - service: media_player.play_media
-      # data:
-        # entity_id: media_player.home
-        # media_content_id: http://192.168.1.41:8123/local/waves/backdoor.mp3
-        # media_content_type: music
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.google_assistant
+        media_content_id: http://192.168.1.41:8123/local/waves/backdoor.mp3
+        media_content_type: music
     - service: tts.google_say
-      entity_id: media_player.home
+      entity_id: media_player.google_assistant
       data:
         message: Back door Open
 #
@@ -134,7 +134,7 @@
     to: 'on'
   action:
     service: tts.google_say
-    entity_id: media_player.home
+    entity_id: media_player.google_assistant
     data:
       message: Front door open
 #
@@ -149,7 +149,7 @@
     to: open
   action:
     service: tts.google_say
-    entity_id: media_player.home
+    entity_id: media_player.google_assistant
     data:
       message: Garage Door Opened
 #
@@ -160,7 +160,7 @@
     to: closed
   action:
     service: tts.google_say
-    entity_id: media_player.home
+    entity_id: media_player.google_assistant
     data:
       message: Garage Door Closed
 #
@@ -181,7 +181,7 @@
       # state: 'home'
   action:
     service: tts.google_say
-    entity_id: media_player.home
+    entity_id: media_player.google_assistant
     data_template:
      message: "You got {{ states.sensor.deliveries_today.state }} Mail"
 #
@@ -193,7 +193,7 @@
   trigger:
   - platform: time
     minutes: 00
-    seconds: 00
+    seconds: 01
   condition:
     condition: time
     after: '08:00:00'
@@ -201,11 +201,11 @@
   action:
   - service: media_player.play_media
     data_template:
-      entity_id: media_player.home
+      entity_id: media_player.google_assistant
       media_content_id: /local/waves/chime{{now().strftime("%I")}}.wav
       media_content_type: music
   - service: tts.google_say
-    entity_id: media_player.home
+    entity_id: media_player.google_assistant
     data_template:
       message: Its {{now().strftime("%I %p")}}
       cache: true
@@ -217,7 +217,7 @@
     at: '22:00:00'
   action:
   - service: tts.google_say
-    entity_id: media_player.home
+    entity_id: media_player.google_assistant
     data:
       message: It's 10 pm master, Starting Sleep mode.
   - service: light.turn_off
@@ -241,7 +241,7 @@
     at: 07:30:00
   action:
   - service: tts.google_say
-    entity_id: media_player.home
+    entity_id: media_player.google_assistant
     data:
       message: It's 7:30 AM, Starting wake up mode.
   - service: light.turn_off
@@ -270,6 +270,44 @@
   - service: switch.turn_off
     entity_id:
     - switch.boys_tv
+#
+- alias: Game on
+  trigger:
+  - platform: time
+    at: '17:00:00'
+  condition:
+    condition: time
+    after: "17:00:00"
+    before: "19:00:00"
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+  action:
+  - service: switch.turn_on
+    entity_id:
+    - switch.computer
+#
+- alias: Game off
+  trigger:
+  - platform: time
+    at: '19:00:00'
+  condition:
+    condition: time
+    after: "19:00:00"
+    before: "20:00:00"
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+  action:
+  - service: switch.turn_of
+    entity_id:
+    - switch.computer
 #
 - alias: Scarlett
   trigger:
@@ -322,7 +360,7 @@
   # - service: switch.toggle
     # entity_id: switch.blue
   # - service: tts.google_say
-    # entity_id: media_player.home
+    # entity_id: media_player.google_assistant
     # data:
       # message: Hello Master, I see you at your computer. Would you like some relaxing music while you are working? 
 #
@@ -335,7 +373,7 @@
   # - service: switch.turn_on
     # entity_id: switch.dinning_room
   # - service: tts.google_say
-    # entity_id: media_player.home
+    # entity_id: media_player.google_assistant
     # data:
       # message: Turning Dinning room lights on for you Master.
  #
@@ -353,9 +391,6 @@
   action:
     - service: switch.turn_off
       entity_id: switch.kitchen
-    - service: light.turn_off
-      entity_id: light.laundry
-
 #
 ##################################################################################
 ##################################     TEMP    ###################################
@@ -365,37 +400,37 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.motion_sensor_temperature
-      above: 84
+      above: 85
   action:
   - service: tts.google_say
-    entity_id: media_player.home
+    entity_id: media_player.google_assistant
     data_template:
       message: The Temperature is  {{ states.sensor.motion_sensor_temperature.state }} degrees. Please check the AC for problems.
 - alias: tempup
   trigger:
     - platform: numeric_state
       entity_id: sensor.motion_sensor_temperature
-      above: 82
+      above: 84
   action:
     service: tts.google_say
-    entity_id: media_player.home
+    entity_id: media_player.google_assistant
     data_template:
-      message: The Temperature is now  {{ states.sensor.motion_sensor_temperature.state }} degrees.
+      message: The Temperature is now higher than {{ states.sensor.motion_sensor_temperature.state }} degrees.
 #
 - alias: tempdown
   trigger:
     - platform: numeric_state
       entity_id: sensor.motion_sensor_temperature
-      below: 76
+      below: 72
   condition:
     - condition: time
       after: '07:00:00'
       before: '23:00:00'
   action:
     service: tts.google_say
-    entity_id: media_player.home
+    entity_id: media_player.google_assistant
     data_template:
-        message: The Temperature is now {{ states.sensor.motion_sensor_temperature.state }} degrees.
+        message: The Temperature is now below than {{ states.sensor.motion_sensor_temperature.state }} degrees.
         
 #
 ##################################################################################

@@ -29,8 +29,8 @@
   icon: mdi:routes
 
 - name: Connie
-  latitude: 26.5200321
-  longitude: -81.828854
+  latitude: 26.580299
+  longitude: -81.828848
   radius: 300
   icon: mdi:routes
 

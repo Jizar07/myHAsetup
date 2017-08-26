@@ -1,0 +1,221 @@
+      name: Demo Floorplan
+      image: /local/custom_ui/floorplan/floorplan.svg
+      stylesheet: /local/custom_ui/floorplan/floorplan.css
+      
+      # These options are optional
+      # warnings:                  # enable warnings (to find out why things might ot be working correctly)
+      # pan_zoom:                  # enable experimental panning / zooming
+      # hide_app_toolbar:          # hide the application toolbar (when used as a custom panel)
+      date_format: DD-MMM-YYYY
+      
+      last_motion_entity: sensor.template_last_motion
+      last_motion_class: last-motion
+
+      groups:
+
+        - name: Sensors
+          entities:
+             - sensor.motion_sensor_temperature
+             - sensor.dark_sky_temperature
+          # text_template: '${entity.state ? entity.state : "unknown"}'
+          # An example of rounding up a number, i.e. a temperature of 90.1 becomes 91
+          text_template: '${entity.state ? Math.ceil(entity.state) : "undefined"}'  
+          class_template: '
+            var temp = parseFloat(entity.state.replace("°", ""));
+            if (temp < 10)
+              return "temp-low";
+            else if (temp < 30)
+              return "temp-medium";
+            else
+              return "temp-high";
+            '
+        - name: Time
+          entities:
+             - sensor.time
+             - sensor.date
+             - sensor.template_last_motion
+          text_template: '${(entity.state)}'
+                      
+        - name: Mail
+          entities:
+             - sensor.deliveries_today
+             - sensor.packages_in_transit
+             - sensor.nil
+             - sensor.jizar
+          text_template: '${(entity.state)}'
+          
+        - name: Meter
+          entities:
+             - sensor.aeotec_dsb09104_home_energy_meter_energy
+          text_template: '${(entity.state)}'
+          
+        - name: Lights
+          entities:
+               - light.boys_room
+               - light.master
+               - light.hallway
+               - light.laundry
+               - light.backyard
+               - switch.dinning_room
+               - switch.kitchen
+               - switch.red_rope
+               - switch.blue
+               - switch.front_of_the_house
+               - switch.master
+               - switch.boys_tv
+               - switch.computer
+               
+          states:
+            - state: 'on'
+              class: 'light-on'
+            - state: 'off'
+              class: 'light-off'
+          action:
+            domain: homeassistant
+            service: toggle
+
+        # - name: Switches
+          # entities:
+             # - switch.doorbell
+          # states:
+            # - state: 'on'
+              # class: 'doorbell-on'
+            # - state: 'off'
+              # class: 'doorbell-off'
+
+        # - name: NVR
+          # entities:
+             # - binary_sensor.blue_iris_nvr
+          # text_template: '${(entity.state === "on") ? "online" : "offline"}'
+          # states:
+            # - state: 'off'
+              # class: 'danger-text'
+            # - state: 'on'
+              # class: 'success-text'
+
+        - name: Alarm Panel
+          entities:
+             - alarm_control_panel.stoffels_alarm
+          states:
+            - state: 'armed_away'
+              class: 'alarm-armed'
+            - state: 'armed_home'
+              class: 'alarm-armed'
+            - state: 'disarmed'
+              class: 'alarm-disarmed'
+
+        - name: Binary sensors
+          entities:
+            - binary_sensor.front_door_opened
+            - binary_sensor.motion_sensor_motion
+            - binary_sensor.patio_door_opened
+          states:
+            - state: 'off'
+              class: 'info-background'
+              fill: '#ffffff'
+            - state: 'on'
+              class: 'warning-background'
+              fill: '#006600'
+          state_transitions:
+            - name: On to off
+              from_state: 'on'
+              to_state: 'off'
+              duration: 10
+
+        - name: Cameras
+          entities:
+            - camera.main_area
+            - camera.ip_camera
+          states:
+            - state: 'idle'
+              class: 'camera-idle'
+              
+        - name: covers
+          entities:
+            - cover.garage_door
+          states:
+            - state: 'closed'
+              class: 'garage-closed'
+              fill: '#b23200'
+            - state: 'open'
+              class: 'garage-open'
+              fill: '#006600'
+          action:
+            service: toggle
+            
+        - name: Media Players
+          entities:
+            - media_player.google_assistant
+            - media_player.mastercast
+            - media_player.samsung_led32_un32j5303
+            - media_player.4k_un60ju7090
+          states:
+            - state: 'off'
+              class: 'squeezebox-off'
+            - state: 'idle'
+              class: 'squeezebox-off'
+            - state: 'paused'
+              class: 'squeezebox-off'
+            - state: 'playing'
+              class: 'squeezebox-on'
+#############################################################################
+####################################### MYSHIT ##############################
+#############################################################################       
+        - name: Devices
+          entities:
+            - device_tracker.jizar_nil
+            - device_tracker.jizar_jizar
+          states:
+            - state: template
+              value_template: '{{ states.entity.state != "home" }}'
+              class: 'invisible'
+              
+        - name: Cars
+          entities:
+            - sensor.jizarcar
+            - sensor.nilcar
+          states:
+            - state: 'home'
+              class: 'invisible'
+              
+        - name: Location
+          entities:
+            - sensor.nil
+            - sensor.jizar
+          text_template: '${(entity.state)}'
+          states:
+            - state: 'Home'
+              class: 'invisible'
+            # - state: 'not_home'
+              # class: 'visible'
+         
+        - name: spinner
+          entities:
+            - sensor.nilspin
+            - sensor.jizarspin
+            - sensor.nilspin2
+            - sensor.jizarspin2
+          states:
+            - state: 'not_home'
+              class: 'spin'
+            - state: 'home'
+              class: 'invisible'
+#############################################################################
+###################################### MYSHIT ###############################
+#############################################################################
+#        - name: thermostat_temp
+#          entities:
+#            - climate.downstairs
+#            - climate.upstairs
+#          text_template: '${entity.attributes.current_temperature ? entity.attributes.current_temperature : "undefined"}'
+#
+# The above text_template uses extended attributes from the climate.* objects to get current temperature.
+
+#        - name: text_states
+#          entities:
+#            - sensor.downstairs_thermostat_humidity
+#            - sensor.dark_sky_temperature
+#            - sensor.last_message
+#          text_template: '${entity.state ? entity.state.replace(/\s{2,}/g,"") : "undefined"}'
+#
+# The above text_template uses jQuery syntax to search and replace any instance of 2 consecutive (or more) spaces in a string of text.

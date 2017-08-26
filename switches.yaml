@@ -64,3 +64,14 @@
 - platform: rpi_gpio
   ports:
     21: siren
+    
+- platform: template
+  switches:
+    garage_cover:
+      value_template: "{{ is_state_attr('cover.garage', 'current_position', 100) }}"
+      turn_on:
+        service: cover.open_cover
+        entity_id: cover.garage
+      turn_off:
+        service: cover.close_cover
+        entity_id: cover.garage

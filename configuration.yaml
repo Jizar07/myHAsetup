@@ -36,31 +36,34 @@ sensor: !include sensors.yaml
 switch: !include switches.yaml
 zone: !include zones.yaml
 
+binary_sensor: !include binary_sensors.yaml
+
 #################################################################################
 ####################################   CUSTOMS    ###############################
 #################################################################################
-
-frontend:
- themes:
-   purple:
-     primary-color: "#6600cc"
-   black:
-     primary-color: black
+panel_custom:
+  - name: floorplan
+    sidebar_title: Floorplan
+    sidebar_icon: mdi:home
+    url_path: floorplan
+    config: !include floorplan.yaml
+#
+frontend: !include frontend.yaml
 #
 zwave:
   usb_path: /dev/ttyACM0
 #
 tts:
   - platform: google
-    # cache: true
-    # cache_dir: /tmp/tts
-    # time_memory: 300
+    cache: true
+    cache_dir: /tmp/tts
+    time_memory: 300
 #
 http:
-  # api_password: !secret api_password
-  # ssl_certificate: /ssl/fullchain.pem
-  # ssl_key: /ssl/privkey.pem
-  # base_url: !secret base_url 
+  api_password: !secret api_password
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem
+  base_url: !secret base_url 
 
 #
 mqtt:

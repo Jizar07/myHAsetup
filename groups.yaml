@@ -10,6 +10,7 @@ default_view:
   - sensor.yr_symbol
   - sensor.motion_sensor_temperature
   - sensor.speedtest_download
+  - group.weather
   - group.time
   - group.tracker
   - group.deliveries
@@ -50,7 +51,7 @@ Family_room_view:
   - switch.red_rope
   - remote.harmony_hub
   - media_player.mastercast
-  - media_player.home
+  - media_player.google_assistant
   - media_player.un60ju7090_un60ju7090
   - media_player.4k_tv_60
   - media_player.samsung_tv_remote
@@ -69,9 +70,9 @@ power_view:
   icon: mdi:power-settings
   entities:
   - group.energy_meter
-  - group.energy
-  - group.power
-  - group.interval
+  # - group.energy
+  # - group.power
+  # - group.interval
 automations_view:
   view: true
   name: Automations
@@ -124,6 +125,8 @@ automations:
   - automation.delivery
   - automation.boys_alarm
   - automation.scarlett
+  - automation.game_on
+  - automation.game_off
 # B
 binary_sensor:
   name: Binary Sensors
@@ -162,19 +165,19 @@ energy_meter:
   - zwave.aeotec_dsb09104_home_energy_meter
   - zwave.aeotec_zw090_zstick_gen5_us
   - sensor.aeotec_dsb09104_home_energy_meter_interval
-  - sensor.aeotec_dsb09104_home_energy_meter_interval_2
-  - sensor.aeotec_dsb09104_home_energy_meter_interval_3
+  # - sensor.aeotec_dsb09104_home_energy_meter_interval_2
+  # - sensor.aeotec_dsb09104_home_energy_meter_interval_3
   - sensor.aeotec_dsb09104_home_energy_meter_power
-  - sensor.aeotec_dsb09104_home_energy_meter_power_2
-  - sensor.aeotec_dsb09104_home_energy_meter_power_3
-  - sensor.aeotec_dsb09104_home_energy_meter_power_4
-  - sensor.aeotec_dsb09104_home_energy_meter_power_5
-  - sensor.aeotec_dsb09104_home_energy_meter_power_6
-  - sensor.aeotec_dsb09104_home_energy_meter_energy_2
-  - sensor.aeotec_dsb09104_home_energy_meter_energy_3
+  # - sensor.aeotec_dsb09104_home_energy_meter_power_2
+  # - sensor.aeotec_dsb09104_home_energy_meter_power_3
+  # - sensor.aeotec_dsb09104_home_energy_meter_power_4
+  # - sensor.aeotec_dsb09104_home_energy_meter_power_5
+  # - sensor.aeotec_dsb09104_home_energy_meter_power_6
+  # - sensor.aeotec_dsb09104_home_energy_meter_energy_2
+  # - sensor.aeotec_dsb09104_home_energy_meter_energy_3
   - sensor.aeotec_dsb09104_home_energy_meter_energy
-  - sensor.aeotec_dsb09104_home_energy_meter_previous_Reading_2
-  - sensor.aeotec_dsb09104_home_energy_meter_previous_Reading_3
+  # - sensor.aeotec_dsb09104_home_energy_meter_previous_Reading_2
+  # - sensor.aeotec_dsb09104_home_energy_meter_previous_Reading_3
   - sensor.aeotec_dsb09104_home_energy_meter_previous_Reading
 # F
 family_room:
@@ -185,7 +188,7 @@ family_room:
   - switch.red_rope
   - remote.harmony_hub
   - media_player.mastercast
-  - media_player.home
+  - media_player.google_assistant
   - device_tracker.tv_un60ju7090
 # G
 # H
@@ -225,8 +228,11 @@ players:
   name: Media Players
   icon: mdi:play
   entities:
-  - media_player.home
-  - media_player.4k_tv_60
+  - media_player.plex_6o762zskbcmux3g2subl291w
+  - media_player.plex_owpk1j8n19kwe32af50dup3b
+  - media_player.plex_g4ov3n0cdvq9g7bp6ldxlib0
+  - media_player.google_assistant
+  - media_player.4k_UN60JU7090
   - media_player.daddys_kodi
   - media_player.scarletts_kodi
   - media_player.mastercast
@@ -285,5 +291,21 @@ tracker:
 # V
 # X
 # W
+weather:
+ name: Dark Sky Weather
+ icon: mdi:cloud
+ entities:
+ - sensor.dark_sky_nearest_storm_distance
+ - sensor.dark_sky_summary
+ - sensor.dark_sky_temperature
+ - sensor.dark_sky_humidity
+ - sensor.dark_sky_pressure
+ - sensor.dark_sky_visibility
+ 
 # Y
 # Z
+zones:
+  name: Zones
+  entities:
+    - sensor.template_last_motion
+    - binary_sensor.floorplan

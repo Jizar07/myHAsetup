@@ -122,7 +122,7 @@ jizarsiphone:
   mac: 9C:8B:A0:1E:03:8D
   name: jizars-iPhone
   picture:
-  track: false
+  track: true
   vendor: Apple, Inc.
 
 ec9bf3a22511:
@@ -140,7 +140,7 @@ thermostat00184435:
   mac: D4:81:CA:55:A0:E4
   name: Thermostat-00184435
   picture:
-  track: false
+  track: true
   vendor: iDevices, LLC
 
 androidea18d75827c11c7d:
@@ -259,3 +259,48 @@ jizar_jizar:
   picture:
   track: true
   vendor:
+
+androidba206253849ef65e:
+  hide_if_away: false
+  icon:
+  mac: E4:40:E2:26:7C:9A
+  name: android-ba206253849ef65e
+  picture:
+  track: true
+  vendor: Samsung Electronics Co.,Ltd
+
+b072bfaf0a69:
+  hide_if_away: false
+  icon:
+  mac: B0:72:BF:AF:0A:69
+  name: --
+  picture:
+  track: true
+  vendor: Murata Manufacturing Co., Ltd.
+
+5ccf7fa7afc0:
+  hide_if_away: false
+  icon:
+  mac: 5C:CF:7F:A7:AF:C0
+  name: --
+  picture:
+  track: true
+  vendor: Espressif Inc.
+
+android900eab9821a0273d:
+  hide_if_away: false
+  icon:
+  mac: E4:F8:EF:13:ED:05
+  name: android-900eab9821a0273d
+  picture:
+  track: true
+  vendor: Samsung Electronics Co.,Ltd
+
+f877b8436cb1:
+  hide_if_away: false
+  icon:
+  mac: F8:77:B8:43:6C:B1
+  name: --
+  picture:
+  track: true
+  vendor: unknown
