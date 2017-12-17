@@ -1,8 +1,3 @@
 ##########################################################
 ########################   KODIS  ########################
 ##########################################################
-
-#### Back door #####
-  # play_sound: media_player.home /local/waves/backdoor.wav
-  
- ##### { "entity_id": "media_player.home", "media_content_id": "http://192.168.1.41:8123/local/waves/backdoor.wav", "media_content_type": "audio/wav" }

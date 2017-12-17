@@ -4,20 +4,26 @@ default_view:
   name: Default View
   icon: mdi:home
   entities: 
-  - sun.sun
+  - group.temperature
+  - group.tracker
   - sensor.ram_free
-  - sensor.aeotec_dsb09104_home_energy_meter_energy
+  - sensor.energy_meter_energy
   - sensor.yr_symbol
   - sensor.motion_sensor_temperature
-  - sensor.speedtest_download
   - group.weather
   - group.time
-  - group.tracker
   - group.deliveries
   - group.alarm
   - alarm_control_panel.stoffels_alarm
   - group.lights
   - group.switches
+  - camera.usps_mail
+  - customizer.customizer
+  - updater.updater
+  - group.ms1
+  - group.ms2
+  - group.ms3
+  - group.ms4
 # 2
 camera_view:
   view: true
@@ -47,32 +53,24 @@ Family_room_view:
   name: Family Room
   icon: mdi:sofa
   entities:
-  - switch.blue
-  - switch.red_rope
+  - switch.sonoff56
   - remote.harmony_hub
-  - media_player.mastercast
-  - media_player.google_assistant
-  - media_player.un60ju7090_un60ju7090
-  - media_player.4k_tv_60
-  - media_player.samsung_tv_remote
+  - media_player.googlebox
 bedrooms_view:
   view: true
   name: Family Room
   icon: mdi:hotel
   entities:
   - switch.master
-  - light.master
-  - light.boys_room
-  - switch.boys_tv
+  - light.master_bedroom_light
+  - light.boys_light
+  - switch.sonoff59
 power_view:
   view: true
   name: Power Meter
   icon: mdi:power-settings
   entities:
   - group.energy_meter
-  # - group.energy
-  # - group.power
-  # - group.interval
 automations_view:
   view: true
   name: Automations
@@ -80,6 +78,15 @@ automations_view:
   entities:
   - group.automations
   - script.temperature
+  - script.ms1on
+  - script.ms1off
+  - script.lights_off
+octoprint_view:
+  view: true
+  name: OctoPrint
+  icon: mdi:printer-3d
+  entities:
+  - group.octoprint
 #################################################################################################
 ############################################# GROUPS ############################################
 #################################################################################################
@@ -102,12 +109,19 @@ automations:
   name: Automations
   icon: mdi:home-automation
   entities:
+  - automation.3d_printer_off
+  - automation.outside_lights_off
+  - automation.outside_lights_on
+  - automation.Outside_off_during_the_day
+  - automation.closet_off
+  - automation.low_temp
   - automation.zones
   - automation.hourly
   - automation.alarm_away
   - automation.alarm_home
   - automation.flash_lights
-  - automation.detection
+  - automation.detection_on
+  - automation.detection_off
   - automation.disarm
   - automation.10_pm
   - automation.730_am
@@ -127,6 +141,8 @@ automations:
   - automation.scarlett
   - automation.game_on
   - automation.game_off
+  - automation.boys_detection_on
+  - automation.boys_detection_off
 # B
 binary_sensor:
   name: Binary Sensors
@@ -144,6 +160,7 @@ cameras:
   entities:
   - camera.main_area
   - camera.ip_camera
+  - camera.usps_mail
 climate:
   name: Climate
   icon: mdi:climate
@@ -162,23 +179,26 @@ energy_meter:
   name: Energy Meter
   icon: mdi:power
   entities:
-  - zwave.aeotec_dsb09104_home_energy_meter
   - zwave.aeotec_zw090_zstick_gen5_us
-  - sensor.aeotec_dsb09104_home_energy_meter_interval
+  - zwave.aeotec_dsb09104_home_energy_meter
+  - sensor.aeotec_dsb09104_home_energy_meter_energy
+  - sensor.aeotec_dsb09104_home_energy_meter_energy_2
+  # - sensor.aeotec_dsb09104_home_energy_meter_energy_3
+  # - sensor.aeotec_dsb09104_home_energy_meter_exporting
+  # - sensor.aeotec_dsb09104_home_energy_meter_exporting_2
+  # - sensor.aeotec_dsb09104_home_energy_meter_exporting_3
+  # - sensor.aeotec_dsb09104_home_energy_meter_interval
   # - sensor.aeotec_dsb09104_home_energy_meter_interval_2
   # - sensor.aeotec_dsb09104_home_energy_meter_interval_3
   - sensor.aeotec_dsb09104_home_energy_meter_power
-  # - sensor.aeotec_dsb09104_home_energy_meter_power_2
-  # - sensor.aeotec_dsb09104_home_energy_meter_power_3
-  # - sensor.aeotec_dsb09104_home_energy_meter_power_4
-  # - sensor.aeotec_dsb09104_home_energy_meter_power_5
-  # - sensor.aeotec_dsb09104_home_energy_meter_power_6
-  # - sensor.aeotec_dsb09104_home_energy_meter_energy_2
-  # - sensor.aeotec_dsb09104_home_energy_meter_energy_3
-  - sensor.aeotec_dsb09104_home_energy_meter_energy
-  # - sensor.aeotec_dsb09104_home_energy_meter_previous_Reading_2
-  # - sensor.aeotec_dsb09104_home_energy_meter_previous_Reading_3
-  - sensor.aeotec_dsb09104_home_energy_meter_previous_Reading
+  - sensor.aeotec_dsb09104_home_energy_meter_power_2
+  - sensor.aeotec_dsb09104_home_energy_meter_power_3
+  - sensor.aeotec_dsb09104_home_energy_meter_power_4
+  - sensor.aeotec_dsb09104_home_energy_meter_power_5
+  - sensor.aeotec_dsb09104_home_energy_meter_power_6
+  # - sensor.aeotec_dsb09104_home_energy_meter_previous_reading
+  # - sensor.aeotec_dsb09104_home_energy_meter_previous_reading_2
+  # - sensor.aeotec_dsb09104_home_energy_meter_previous_reading_3
 # F
 family_room:
   name: Family Room
@@ -187,9 +207,7 @@ family_room:
   - switch.blue_rope
   - switch.red_rope
   - remote.harmony_hub
-  - media_player.mastercast
-  - media_player.google_assistant
-  - device_tracker.tv_un60ju7090
+  - media_player.family_room_tv
 # G
 # H
 # I
@@ -204,16 +222,20 @@ lights:
   name: Lights
   icon: mdi:lightbuld-outline
   entities:
-  - light.boys_room
-  - light.master
-  - light.hallway
-  - light.laundry
-  - switch.dinning_room
-  - switch.kitchen
-  - switch.red_rope
-  - switch.blue
-  - switch.front_of_the_house
-  - light.backyard
+  - light.boys_light
+  - switch.sonoff59
+  - light.master_bedroom_light
+  - light.hallway_light
+  - light.laundry_light
+  - switch.sonoff58
+  - switch.sonoff57
+  - switch.sonoff57b
+  - switch.kitchen_lights
+  - switch.sonoff56
+  - switch.frontyard_lights
+  - light.backyard_light
+  - light.inside
+  - light.outdoor
 # M
 maps:
   name: Maps
@@ -223,21 +245,39 @@ maps:
   - camera.jizar_map
 # N
 # O
+octoprint:
+  name: OctoPrint
+  icon: mdi:printer-3d
+  entities:
+  - binary_sensor.octoprint
+  - binary_sensor.octoprint_printing
+  - binary_sensor.octoprint_printing_error
+  - sensor.octoprint
+  - sensor.octoprint_actual_bed_temp
+  - sensor.octoprint_actual_tool0_temp
+  - sensor.octoprint_current_state
+  - sensor.octoprint_job_percentage
+  - sensor.octoprint_target_bed_temp
+  - sensor.octoprint_target_tool0_temp
 # P
 players:
   name: Media Players
   icon: mdi:play
   entities:
-  - media_player.plex_6o762zskbcmux3g2subl291w
-  - media_player.plex_owpk1j8n19kwe32af50dup3b
-  - media_player.plex_g4ov3n0cdvq9g7bp6ldxlib0
-  - media_player.google_assistant
-  - media_player.4k_UN60JU7090
-  - media_player.daddys_kodi
-  - media_player.scarletts_kodi
-  - media_player.mastercast
-  - media_player.samsung_led32_un32j5303
+  - media_player.plex
+  - media_player.4KTV
+  - media_player.kodi
+  - media_player.vlc
+  - media_player.googlebox
+  - media_player.gameroom_speaker
+  - media_player.plex_7xcleh4soojb4
   - media_player.samsung_led40_un40j5200
+  - media_player.samsung_led32_un32j5303
+  - media_player.family_room_tv
+  - media_player.living_room_un60ju7090
+  - media_media_player.plex_ab23df7e547be9a8_com_plexapp_android
+  - media_player.plex_g4ov3n0cdvq9g7bp6ldxlib0
+  - media_player.plex_zpcbbejvs2qek
 # Q
 # R
 remotes:
@@ -255,14 +295,58 @@ sensors:
   - sensor.motion_sensor_temperature
   - sensor.fastcom_download
   - cover.garage_door
+  - sensor.energy
+  - sensor.power
+  - sensor.voltage
+  - sensor.plex
+ms1:  
+  name: Multi Sensor 1
+  entities:  
+  - sensor.MS1_temperature  
+  - sensor.MS1_humidity  
+  - sensor.MS1_ldr  
+  - sensor.MS1_pir  
+  - light.MS1_led
+ms2:  
+  name: Multi Sensor2
+  entities:  
+  - sensor.MS2_temperature  
+  - sensor.MS2_humidity  
+  - sensor.MS2_ldr  
+  - sensor.MS2_pir  
+  - light.MS2_led
+ms3:  
+  name: Multi Sensor 3
+  entities:  
+  - sensor.MS3_temperature  
+  - sensor.MS3_humidity  
+  - sensor.MS3_ldr  
+  - sensor.MS3_pir  
+  - light.MS3_led
+ms4:  
+  name: Multi Sensor 4
+  entities:  
+  - sensor.MS4_temperature  
+  - sensor.MS4_humidity  
+  - sensor.MS4_ldr  
+  - sensor.MS4_pir  
+  - light.MS4_led
 switches:
   name: Switches
   icon: mdi:dip-switch
   entities:
-  - switch.boys_tv
-  - switch.computer
-  - switch.master
+  - switch.sonoff50
+  - switch.sonoff51
+  - switch.sonoff52
   - switch.siren
+  - switch.sonoff53
+  - switch.sonoff54
+  - switch.sonoff55
+  - switch.sonoff56
+  - sensor.energy
+  - sensor.power
+  - sensor.voltage
+  - sensor.power_factor
 # T
 time:
   name: Time
@@ -270,23 +354,25 @@ time:
   entities:
   - sensor.time
   - sensor.date
-topsensors:
-  name: Top Sensors
-  icon: mdi:white-balance-iridescent
+  - sensor.speedtest_download
+temperature:
+  name: Temperatures
+  icon: mdi:thermometer
   entities:
-  - sensor.fastcom_download
+  - sensor.dark_sky_temperature
   - sensor.motion_sensor_temperature
-  - sensor.yr_symbol
-  - sun.sun
-  - device_tracker.jizar_jizar
-  - device_tracker.jizar_nil
+  - sensor.ms1_temperature
+  - sensor.MS2_temperature 
+  - sensor.ms3_temperature
+  - sensor.ms4_temperature
 tracker:
   name: Trackers
   icon: mdi:map
   entities:
+  - sensor.jizar
   - sensor.nil
   - sensor.scarlett
-  - sensor.jizar
+  - sensor.nenem
 # U
 # V
 # X
@@ -301,7 +387,9 @@ weather:
  - sensor.dark_sky_humidity
  - sensor.dark_sky_pressure
  - sensor.dark_sky_visibility
- 
+ - sensor.dark_sky_wind_speed
+ - sensor.dark_sky_wind_bearing
+ - sensor.dark_sky_ozone
 # Y
 # Z
 zones:

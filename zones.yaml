@@ -10,11 +10,11 @@
   radius: 300
   icon: mdi:school
 
-- name: Home
-  latitude: !secret homelat
-  longitude: !secret homelon
-  radius: 300
-  icon: mdi:home
+# - name: Home
+  # latitude: !secret homelat
+  # longitude: !secret homelon
+  # radius: 300
+  # icon: mdi:home
 
 - name: Dina
   latitude: 26.482284

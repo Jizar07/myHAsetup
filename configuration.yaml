@@ -18,6 +18,8 @@ conversation:
 history:
 logbook:
 sun:
+map:
+wink:
 
 #################################################################################
 ####################################   INCLUDES   ###############################
@@ -35,12 +37,13 @@ sensor: !include sensors.yaml
 #shell_command: !include shellcommand.yaml
 switch: !include switches.yaml
 zone: !include zones.yaml
-
 binary_sensor: !include binary_sensors.yaml
+light: !include light.yaml
 
 #################################################################################
 ####################################   CUSTOMS    ###############################
 #################################################################################
+
 panel_custom:
   - name: floorplan
     sidebar_title: Floorplan
@@ -53,6 +56,16 @@ frontend: !include frontend.yaml
 zwave:
   usb_path: /dev/ttyACM0
 #
+google_assistant:
+  project_id: !secret project_id
+  client_id: !secret project_id
+  access_token: !secret access_token
+  agent_user_id: !secret email
+  api_key: !secret gaapi_key
+  exposed_domains:
+    - switch
+    - light
+#
 tts:
   - platform: google
     cache: true
@@ -61,9 +74,11 @@ tts:
 #
 http:
   api_password: !secret api_password
-  ssl_certificate: /ssl/fullchain.pem
-  ssl_key: /ssl/privkey.pem
-  base_url: !secret base_url 
+  ip_ban_enabled: True
+  login_attempts_threshold: 3
+  # ssl_certificate: /ssl/fullchain.pem
+  # ssl_key: /ssl/privkey.pem
+  # base_url: !secret base_url 
 
 #
 mqtt:
@@ -72,25 +87,28 @@ mqtt:
   username: !secret username
   password: !secret password
 #
-wink:
-  email: !secret email
-  password: !secret wink_pass
-#
 alarm_control_panel:
   - platform: manual
     name: Stoffel's Alarm
-   # code: !secret alarmcode
+    code: !secret alarmcode
     pending_time: 5
     trigger_time: 5
     disarm_after_trigger: false
 #
-ifttt:
-  key: !secret ifttt_key
-
 notify:
   - platform: pushbullet
     name: Jizar
     api_key: !secret pushbulletapi
 #
-# emulated_hue:
-  # listen_port: 80
+customizer:
+  custom_ui: local
+  hide_attributes:
+    - node_id
+    - value_index
+#
+octoprint:
+  host: 192.168.1.4
+  api_key: !secret opapi_key
+  bed: true
+  number_of_tools: 1
+  

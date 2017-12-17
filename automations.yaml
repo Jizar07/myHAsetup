@@ -5,6 +5,38 @@
 ##################################################################################
 
 ##################################################################################
+################################   3D PRINTER   ##################################
+##################################################################################
+
+- alias: 'Low temp'
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.octoprint_actual_bed_temp
+      below: 120
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: sensor.octoprint_current_state
+        state: 'Printing'
+      - condition: numeric_state
+        entity_id: sensor.octoprint_job_percentage
+        below: '1.0'
+  action:
+    - service: tts.google_say
+      entity_id: 
+        - media_player.googlebox
+        - media_player.living_room_un60ju7090
+        - media_player.4ktv
+        - media_player.gameroom_speaker
+      data:
+        message: Printer Bed is below 50
+    - service: notify.jizar
+      data:
+        title: Printer
+        message: Bed Temp is Low
+#
+##################################################################################
 ################################   ALARM AWAY   ##################################
 ##################################################################################
 
@@ -55,6 +87,46 @@
       entity_id: switch.siren
 #
 ##################################################################################
+#########################   SUNSHINE - SUNRISE   #############################
+##################################################################################
+
+- alias: 'Outside Lights off'
+  trigger:
+    - platform: sun
+      event: sunrise
+  action:
+    - service: switch.turn_off
+      entity_id:
+        - switch.frontyard_lights
+        - switch.sonoff57b
+#
+- alias: 'Outside off during the day'
+  trigger:
+    - platform: state
+      entity_id:
+        - switch.frontyard_lights
+        - switch.sonoff57b
+      to: 'on'
+  condition:
+    - condition: time
+      after: '08:00:00'
+      before: '17:00:00'
+  action:
+    - service: switch.turn_off
+      entity_id:
+        - switch.frontyard_lights
+        - switch.sonoff57b
+#
+- alias: 'Outside Lights on'
+  trigger:
+    - platform: sun
+      event: sunset
+  action:
+    - service: switch.turn_on
+      entity_id:
+        - switch.frontyard_lights
+        - switch.sonoff57b
+##################################################################################
 #########################   LIGHT FLASH / SIREN ON   #############################
 ##################################################################################
 
@@ -99,6 +171,29 @@
         message: The alarm in the is Disarmed
 #
 ##################################################################################
+################################   OCTOPRINT    ##################################
+##################################################################################
+
+- alias: '3D Printer off'
+  trigger:
+    - platform: state
+      entity_id: sensor.octoprint_job_percentage
+      to: '100'
+  # condition:
+    # - condition: state
+      # entity_id: alarm_control_panel.stoffels_alarm
+      # state: armed_away
+  action:
+    - delay: 1:00
+    - service: switch.turn_off
+      entity_id: switch.sonoff51
+    - service: tts.google_say
+      entity_id:
+        - media_player.googlebox
+        - media_player.gameroom_speaker
+      data_template:
+       message: "Print is done, turning 3D printer off"
+##################################################################################
 #################################### BACK DOOR ###################################
 ##################################################################################
 
@@ -113,13 +208,10 @@
       entity_id: alarm_control_panel.stoffels_alarm
       state: disarmed
   action:
-    - service: media_player.play_media
-      data:
-        entity_id: media_player.google_assistant
-        media_content_id: http://192.168.1.41:8123/local/waves/backdoor.mp3
-        media_content_type: music
     - service: tts.google_say
-      entity_id: media_player.google_assistant
+      entity_id: 
+        - media_player.googlebox
+        - media_player.gameroom_speaker
       data:
         message: Back door Open
 #
@@ -134,7 +226,9 @@
     to: 'on'
   action:
     service: tts.google_say
-    entity_id: media_player.google_assistant
+    entity_id: 
+      - media_player.googlebox
+      - media_player.gameroom_speaker
     data:
       message: Front door open
 #
@@ -149,7 +243,9 @@
     to: open
   action:
     service: tts.google_say
-    entity_id: media_player.google_assistant
+    entity_id: 
+      - media_player.googlebox
+      - media_player.gameroom_speaker
     data:
       message: Garage Door Opened
 #
@@ -160,7 +256,9 @@
     to: closed
   action:
     service: tts.google_say
-    entity_id: media_player.google_assistant
+    entity_id: 
+      - media_player.googlebox
+      - media_player.gameroom_speaker
     data:
       message: Garage Door Closed
 #
@@ -181,10 +279,103 @@
       # state: 'home'
   action:
     service: tts.google_say
-    entity_id: media_player.google_assistant
+    entity_id: 
+      - media_player.googlebox
+      - media_player.gameroom_speaker
     data_template:
      message: "You got {{ states.sensor.deliveries_today.state }} Mail"
 #
+##################################################################################
+###############################    MULTI SENSORS    ##############################
+##################################################################################
+
+#
+############################################# BOYS OFF
+#
+- alias: boys_detection_off
+  trigger:
+  - platform: state
+    entity_id: sensor.sn1_pir
+    to: 'standby'
+    for:
+      minutes: 5
+  action:
+    - service: light.turn_off
+      entity_id: light.boys_light
+    - service: light.turn_on
+      data:
+        entity_id: light.sn1_led
+        brightness: 255
+        color_name: blue
+        flash: short
+    - service: tts.google_say
+      entity_id: 
+        - media_player.googlebox
+        - media_player.gameroom_speaker
+      data_template:
+       message: "Turning boy's room off"
+#
+############################################# SCARLETT OFF
+#
+- alias: boys_detection_off
+  trigger:
+  - platform: state
+    entity_id: sensor.sn1_pir
+    to: 'standby'
+    for:
+      minutes: 5
+  action:
+    - service: light.turn_off
+      entity_id: switch.sonoff59
+    - service: light.turn_on
+      data:
+        entity_id: light.sn1_led
+        brightness: 255
+        color_name: pink
+        flash: short
+    - service: tts.google_say
+      entity_id: 
+        - media_player.googlebox
+        - media_player.gameroom_speaker
+      data_template:
+       message: "Turning scarlett's room off"
+#
+
+          
+#
+############################################# LIGHT OFF AT 10:30PM
+#
+- alias: Boys Light
+  trigger:
+  - platform: state
+    entity_id: light.boys_light
+    to: 'on'
+    for:
+      minutes: 5
+  condition:
+    condition: time
+    after: "22:30:00"
+    before: "05:00:00"
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+      - sat
+      - sun
+  action:
+    - service: light.turn_off
+      entity_id: light.boys_light
+    - service: tts.google_say
+      entity_id: 
+        - media_player.googlebox
+        - media_player.gameroom_speaker
+      data_template:
+       message: "Boy's Sleep time, Turning Light off"
+#
+
+
 ##################################################################################
 ####################################  TIMERS  ####################################
 ##################################################################################
@@ -197,19 +388,22 @@
   condition:
     condition: time
     after: '08:00:00'
-    before: '22:00:00'
+    before: '22:09:00'
   action:
   - service: media_player.play_media
     data_template:
-      entity_id: media_player.google_assistant
-      media_content_id: /local/waves/chime{{now().strftime("%I")}}.wav
-      media_content_type: music
+      entity_id: media_player.googlebox
+      media_content_id: http://192.168.1.41:8123/local/waves/chime.wav
+      media_content_type: audio/mp3
+  - delay: '00:00:35'
   - service: tts.google_say
-    entity_id: media_player.google_assistant
+    entity_id: 
+      - media_player.googlebox
+      - media_player.gameroom_speaker
     data_template:
       message: Its {{now().strftime("%I %p")}}
       cache: true
-  - delay: '00:00:26'
+  
 #
 - alias: 10 PM
   trigger:
@@ -217,68 +411,33 @@
     at: '22:00:00'
   action:
   - service: tts.google_say
-    entity_id: media_player.google_assistant
+    entity_id: 
+      - media_player.googlebox
+      - media_player.gameroom_speaker
     data:
-      message: It's 10 pm master, Starting Sleep mode.
+      message: "It's 10 pm, Time for Bed!"
+  - delay: '00:00:03'
   - service: light.turn_off
     entity_id:
-    - light.laundry
-    - light.boys_room
+      - light.laundry_light
+      - light.boys_light
+      - switch.sonoff59
+      - switch.sonoff58
+      - switch.sonoff57
+      - switch.kitchen_lights
+  - delay: '00:00:05'
   - service: light.turn_on
-    entity_id: light.hallway
+    entity_id: light.hallway_light
     data:
-      brightness: 50
-  - service: switch.turn_off
-    entity_id:
-    - switch.blue_rope
-    - switch.red_rope
-    - switch.dinning_room
-    - switch.kitchen
+      brightness: 125
+    
 #
-- alias: 7:30 am
+- alias: 6:30 am
   trigger:
   - platform: time
-    at: 07:30:00
-  action:
-  - service: tts.google_say
-    entity_id: media_player.google_assistant
-    data:
-      message: It's 7:30 AM, Starting wake up mode.
-  - service: light.turn_off
-    entity_id:
-    - light.hallway
-  - service: switch.turn_on
-    entity_id:
-    - switch.kitchen
-    - switch.51
-#
-- alias: Boys TV
-  trigger:
-  - platform: time
-    at: '22:00:00'
+    at: '06:30:00'
   condition:
     condition: time
-    after: "22:00:00"
-    before: "23:30:00"
-    weekday:
-      - mon
-      - tue
-      - wed
-      - thu
-      - sun
-  action:
-  - service: switch.turn_off
-    entity_id:
-    - switch.boys_tv
-#
-- alias: Game on
-  trigger:
-  - platform: time
-    at: '17:00:00'
-  condition:
-    condition: time
-    after: "17:00:00"
-    before: "19:00:00"
     weekday:
       - mon
       - tue
@@ -286,37 +445,62 @@
       - thu
       - fri
   action:
-  - service: switch.turn_on
+  - service: tts.google_say
+    entity_id: 
+      - media_player.googlebox
+      - media_player.gameroom_speaker
+    data:
+      message: "It's 6:30 AM, Starting wake up mode"
+  - service: light.turn_on
     entity_id:
-    - switch.computer
+      - switch.kitchen_lights
+      - light.boys_light
+      - light.hallway_light
+    data:
+      brightness: 255
+
+
 #
 - alias: Game off
   trigger:
   - platform: time
-    at: '19:00:00'
+    at: '21:30:00'
   condition:
     condition: time
-    after: "19:00:00"
-    before: "20:00:00"
+    after: "21:30:00"
+    before: "06:00:00"
     weekday:
       - mon
       - tue
       - wed
       - thu
-      - fri
+      - sun
   action:
-  - service: switch.turn_of
+  - service: tts.google_say
+    entity_id: 
+      - media_player.googlebox
+      - media_player.gameroom_speaker
+    data:
+      message: "It's 9:30 PM, Start getting ready for bed, Turning Game off in 1 minute"
+  - delay: 00:01:00
+  - service: switch.turn_off
     entity_id:
-    - switch.computer
+    - switch.sonoff57
+    - switch.sonoff58
 #
 - alias: Scarlett
   trigger:
-  - platform: time
-    at: '23:00:00'
+  - platform: state
+    entity_id:
+    - switch.sonoff52
+    - switch.sonoff59
+    to: 'on'
+    for:
+      minutes: 5
   condition:
     condition: time
-    after: "22:00:00"
-    before: "23:30:00"
+    after: "23:00:00"
+    before: "06:30:00"
     weekday:
       - mon
       - tue
@@ -326,26 +510,9 @@
   action:
   - service: switch.turn_off
     entity_id:
-    - switch.master
-#
-- alias: Boys Alarm
-  trigger:
-  - platform: time
-    at: '06:15:00'
-  condition:
-    condition: time
-    after: "05:00:00"
-    before: "07:00:00"
-    weekday:
-      - mon
-      - tue
-      - wed
-      - thu
-      - fri
-  action:
-  - service: light.turn_on
-    entity_id:
-    - switch.boys_room
+    - switch.sonoff52
+    - switch.sonoff59
+
 ##################################################################################
 ####################################  CAMERAS  ###################################
 ##################################################################################
@@ -360,7 +527,7 @@
   # - service: switch.toggle
     # entity_id: switch.blue
   # - service: tts.google_say
-    # entity_id: media_player.google_assistant
+    # entity_id: media_player.googlebox
     # data:
       # message: Hello Master, I see you at your computer. Would you like some relaxing music while you are working? 
 #
@@ -371,27 +538,52 @@
     # to: Jizar Stoffel
   # action:
   # - service: switch.turn_on
-    # entity_id: switch.dinning_room
+    # entity_id: switch.sonoff58
   # - service: tts.google_say
-    # entity_id: media_player.google_assistant
+    # entity_id: media_player.googlebox
     # data:
       # message: Turning Dinning room lights on for you Master.
  #
 ##################################################################################
-##################################  DETECTION  ###################################
+###############################  Closet DETECTION  ##############################
 ##################################################################################
 
-- alias: detection
+- alias: closet_off
+  trigger:
+  - platform: state
+    entity_id: light.closet_light
+    to: 'on'
+    for:
+      minutes: 15
+  action:
+    - service: light.turn_off
+      entity_id: light.closet_light
+
+##################################################################################
+###############################  KITCHEN DETECTION  ##############################
+##################################################################################
+
+- alias: detection_off
   trigger:
   - platform: state
     entity_id: binary_sensor.motion_sensor_motion
     to: 'off'
     for:
-      minutes: 5
+      minutes: 3
+  condition:
+    condition: state
+    entity_id: switch.kitchen_lights
+    state: 'on'
   action:
     - service: switch.turn_off
-      entity_id: switch.kitchen
-#
+      entity_id: switch.kitchen_lights
+    - service: tts.google_say
+      entity_id: 
+        - media_player.googlebox
+        - media_player.gameroom_speaker
+      data_template:
+       message: "Turning Kitchen lights off"
+
 ##################################################################################
 ##################################     TEMP    ###################################
 ##################################################################################
@@ -403,7 +595,9 @@
       above: 85
   action:
   - service: tts.google_say
-    entity_id: media_player.google_assistant
+    entity_id: 
+      - media_player.googlebox
+      - media_player.gameroom_speaker
     data_template:
       message: The Temperature is  {{ states.sensor.motion_sensor_temperature.state }} degrees. Please check the AC for problems.
 - alias: tempup
@@ -413,7 +607,9 @@
       above: 84
   action:
     service: tts.google_say
-    entity_id: media_player.google_assistant
+    entity_id: 
+      - media_player.googlebox
+      - media_player.gameroom_speaker
     data_template:
       message: The Temperature is now higher than {{ states.sensor.motion_sensor_temperature.state }} degrees.
 #
@@ -428,7 +624,9 @@
       before: '23:00:00'
   action:
     service: tts.google_say
-    entity_id: media_player.google_assistant
+    entity_id: 
+      - media_player.googlebox
+      - media_player.gameroom_speaker
     data_template:
         message: The Temperature is now below than {{ states.sensor.motion_sensor_temperature.state }} degrees.
         
@@ -439,116 +637,116 @@
 - alias: zones
   trigger:
   - platform: zone
-    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    entity_id: device_tracker.nilzete_s6, sensor.nil
     zone: zone.bschool
     event: enter
   - platform: zone
-    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    entity_id: device_tracker.nilzete_s6, sensor.nil
     zone: zone.sschool
     event: enter
   - platform: zone
-    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    entity_id: device_tracker.nilzete_s6, sensor.nil
     zone: zone.home
     event: enter
   - platform: zone
-    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    entity_id: device_tracker.nilzete_s6, sensor.nil
     zone: zone.dina
     event: enter
   - platform: zone
-    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    entity_id: device_tracker.nilzete_s6, sensor.nil
     zone: zone.joan
     event: enter
   - platform: zone
-    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    entity_id: device_tracker.nilzete_s6, sensor.nil
     zone: zone.connie
     event: enter
   - platform: zone
-    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    entity_id: device_tracker.nilzete_s6, sensor.nil
     zone: zone.connieapt
     event: enter
   - platform: zone
-    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    entity_id: device_tracker.nilzete_s6, sensor.nil
     zone: zone.janice
     event: enter
   - platform: zone
-    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    entity_id: device_tracker.nilzete_s6, sensor.nil
     zone: zone.leona
     event: enter
   - platform: zone
-    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    entity_id: device_tracker.nilzete_s6, sensor.nil
     zone: zone.lisa
     event: enter
   - platform: zone
-    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    entity_id: device_tracker.nilzete_s6, sensor.nil
     zone: zone.diane
     event: enter
   - platform: zone
-    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    entity_id: device_tracker.nilzete_s6, sensor.nil
     zone: zone.kelly
     event: enter
   - platform: zone
-    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    entity_id: device_tracker.nilzete_s6, sensor.nil
     zone: zone.alison
     event: enter
   - platform: zone
-    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    entity_id: device_tracker.nilzete_s6, sensor.nil
     zone: zone.evelin
     event: enter
 ############################### LEAVE ##############################
   - platform: zone
-    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    entity_id: device_tracker.nilzete_s6, sensor.nil
     zone: zone.bschool
     event: leave
   - platform: zone
-    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    entity_id: device_tracker.nilzete_s6, sensor.nil
     zone: zone.sschool
     event: leave
   - platform: zone
-    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    entity_id: device_tracker.nilzete_s6, sensor.nil
     zone: zone.home
     event: leave
   - platform: zone
-    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    entity_id: device_tracker.nilzete_s6, sensor.nil
     zone: zone.dina
     event: leave
   - platform: zone
-    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    entity_id: device_tracker.nilzete_s6, sensor.nil
     zone: zone.joan
     event: leave
   - platform: zone
-    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    entity_id: device_tracker.nilzete_s6, sensor.nil
     zone: zone.connie
     event: leave
   - platform: zone
-    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    entity_id: device_tracker.nilzete_s6, sensor.nil
     zone: zone.connieapt
     event: leave
   - platform: zone
-    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    entity_id: device_tracker.nilzete_s6, sensor.nil
     zone: zone.janice
     event: leave
   - platform: zone
-    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    entity_id: device_tracker.nilzete_s6, sensor.nil
     zone: zone.leona
     event: leave
   - platform: zone
-    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    entity_id: device_tracker.nilzete_s6, sensor.nil
     zone: zone.lisa
     event: leave
   - platform: zone
-    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    entity_id: device_tracker.nilzete_s6, sensor.nil
     zone: zone.diane
     event: leave
   - platform: zone
-    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    entity_id: device_tracker.nilzete_s6, sensor.nil
     zone: zone.kelly
     event: leave
   - platform: zone
-    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    entity_id: device_tracker.nilzete_s6, sensor.nil
     zone: zone.alison
     event: leave
   - platform: zone
-    entity_id: device_tracker.jizar_nil, device_trackert.jizar_jizar, sensor.nil, sensor.jizar
+    entity_id: device_tracker.nilzete_s6, sensor.nil
     zone: zone.evelin
     event: leave
   action:     

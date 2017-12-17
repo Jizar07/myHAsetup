@@ -2,65 +2,17 @@
 ##################################   TOP SENSORS   ##############################
 #################################################################################
 
-- platform: yr
-  name: Weather
-#
 - platform: speedtest
   name: Internet
   monitored_conditions:
     - download
+    - ping
 #
 - platform: time_date
   display_options:
     - 'time'
     - 'date'
-#################################################################################
-##################################      MAIL       ##############################
-#################################################################################
-#
-- platform: usps
-  name: 'USPS'
-  username: !secret uspsuser
-  password: !secret uspspass
-- platform: ups
-  name: 'UPS'
-  username: !secret upsuser
-  password: !secret upspass
-- platform: fedex
-  name: 'Fedex'
-  username: !secret upsuser
-  password: !secret upspass
-- platform: template
-  sensors:
-    packages_in_transit:
-      friendly_name: "Packages in Transit"
-      value_template: >
-        {% macro in_transit(sensor) %}
-          {{sensor.state|int - delivered(sensor)|int}}
-        {% endmacro %}
-        {% macro delivered(sensor) %}
-          {% if 'delivered' in sensor.attributes %}
-            {{sensor.attributes.delivered}}
-          {% else %}
-             0
-          {% endif %}
-        {% endmacro %}
-        {{in_transit(states.sensor.usps_packages)|int + in_transit(states.sensor.ups)|int + in_transit(states.sensor.fedex)|int}}
-    deliveries_today:
-      friendly_name: "Today's Deliveries"
-      value_template: >
-        {% macro delivered(sensor) %}
-          {% if 'delivered' in sensor.attributes %}
-            {{sensor.attributes.delivered}}
-          {% else %}
-             0
-          {% endif %}
-        {% endmacro %}
-        {{delivered(states.sensor.usps_packages)|int + delivered(states.sensor.ups)|int + delivered(states.sensor.fedex)|int}}
-#
-#################################################################################
-################################                   ##############################
-#################################################################################
+
 #
 - platform: systemmonitor
   resources:
@@ -68,26 +20,28 @@
       arg: /home
     - type: memory_free
 #
-
-- platform: google_geocode
-  name: Nil
-  #api_key: !secret nilkey
-  origin: device_tracker.jizar_nil
-  options: both
-  display_zone: show
 - platform: google_geocode
   name: Jizar
-  #api_key: !secret jizarkey
-  origin: device_tracker.jizar_jizar
+  origin: device_tracker.jizar_j7
   options: both
   display_zone: show
+#
+- platform: google_geocode
+  name: Nil
+  origin: device_tracker.nilzete_s6
+  options: both
+  display_zone: show
+#
 - platform: google_geocode
   name: Scarlett
-  #api_key: !secret jizarkey
-  origin: device_tracker.scarlett
+  origin: device_tracker.scarlett_phone
   options: both
   display_zone: show
-  
+
+
+- platform: plex
+
+#
 - platform: template
   sensors:
     template_last_motion:
@@ -101,30 +55,199 @@
         {% endfor %}
     nilspin:
       friendly_name: 'Nil Spinner'
-      value_template: '{{ states.device_tracker.jizar_nil.state }}'
+      value_template: '{{ states.device_tracker.nilzete_s6.state }}'
     jizarspin:
       friendly_name: 'Jizar Spinner'
-      value_template: '{{ states.device_tracker.jizar_jizar.state }}'
+      value_template: '{{ states.device_tracker.jizar_mercedes.state }}'
     nilspin2:
       friendly_name: 'Nil Spinner2'
-      value_template: '{{ states.device_tracker.jizar_nil.state }}'
+      value_template: '{{ states.device_tracker.nilzete_s6.state }}'
     jizarspin2:
       friendly_name: 'Jizar Spinner2'
-      value_template: '{{ states.device_tracker.jizar_jizar.state }}'
+      value_template: '{{ states.device_tracker.jizar_mercedes.state }}'
     jizarcar:
       friendly_name: 'Jizar car'
-      value_template: '{{ states.device_tracker.jizar_jizar.state }}'
+      value_template: '{{ states.device_tracker.jizar_mercedes.state }}'
     nilcar:
       friendly_name: 'Nil Car'
-      value_template: '{{ states.device_tracker.jizar_nil.state }}'
-        
+      value_template: '{{ states.device_tracker.nilzete_s6.state }}'
+    # road2:
+      # friendly_name: 'road2'
+      # value_template: '{{ states.device_tracker.jizar_j7.state }}'
+    # road1:
+      # friendly_name: 'road1'
+      # value_template: '{{ states.device_tracker.nilzete_s6.state }}'
+#
+
 - platform: darksky
   api_key: !secret darkskyapi
   monitored_conditions:
     - summary
     - nearest_storm_distance
     - wind_speed
+    - wind_bearing
     - temperature
     - humidity
     - pressure
     - visibility
+    - ozone
+#
+##################### Sonoff Pow ##############################
+#
+- platform: mqtt
+  name: Energy
+  state_topic: "tele/sonoff50/ENERGY"
+  value_template: "{{ value_json.Today }}"
+  unit_of_measurement: "kWh"
+- platform: mqtt
+  name: Power
+  state_topic: "tele/sonoff50/ENERGY"
+  value_template: "{{ value_json.Power }}"
+  unit_of_measurement: "W"
+- platform: mqtt
+  name: Voltage
+  state_topic: "tele/sonoff50/ENERGY"
+  value_template: "{{ value_json.Voltage }}"
+  unit_of_measurement: "V"
+- platform: mqtt
+  name: "Power Factor"
+  state_topic: "stat/sonoff50/STATUS8"
+  value_template: "{{ value_json.StatusPWR.Factor }}"
+    
+#######################################################################
+
+- platform: octoprint
+  name: OctoPrint
+  monitored_conditions:
+    - Current State
+    - Temperatures
+    - Job Percentage
+#
+##################### Multi Sensor 1 ##############################
+#
+- platform: mqtt  
+  state_topic: "bruh/sensornode1"  
+  name: "MS1 Humidity"  
+  unit_of_measurement: "%"  
+  value_template: '{{ value_json.humidity | round(1) }}'  
+  
+- platform: mqtt  
+  state_topic: "bruh/sensornode1"  
+  name: "MS1 LDR"
+  ##This sensor is not calibrated to actual LUX. Rather, this a map of the input voltage ranging from 0 - 1023.
+  unit_of_measurement: "LUX"  
+  value_template: '{{ value_json.ldr }}'  
+  
+- platform: mqtt  
+  state_topic: "bruh/sensornode1"  
+  name: "MS1 PIR"  
+  value_template: '{{ value_json.motion }}'  
+  
+- platform: mqtt  
+  state_topic: "bruh/sensornode1"  
+  name: "MS1 Temperature"  
+  unit_of_measurement: "°F"  
+  value_template: '{{ value_json.temperature | round(1) }}'  
+
+- platform: mqtt
+  state_topic: "bruh/sensornode1"
+  name: "MS1 Real Feel"
+  unit_of_measurement: "°F"
+  value_template: '{{ value_json.heatIndex | round(1) }}'
+ 
+#
+##################### Multi Sensor 2 ##############################
+#
+- platform: mqtt  
+  state_topic: "jizar/ms2"  
+  name: "MS2 Humidity"  
+  unit_of_measurement: "%"  
+  value_template: '{{ value_json.humidity | round(1) }}'  
+  
+- platform: mqtt  
+  state_topic: "jizar/ms2"  
+  name: "MS2 LDR"
+  ##This sensor is not calibrated to actual LUX. Rather, this a map of the input voltage ranging from 0 - 1023.
+  unit_of_measurement: "LUX"  
+  value_template: '{{ value_json.ldr }}'  
+  
+- platform: mqtt  
+  state_topic: "jizar/ms2"  
+  name: "MS2 PIR"  
+  value_template: '{{ value_json.motion }}'  
+  
+- platform: mqtt  
+  state_topic: "jizar/ms2"  
+  name: "MS2 Temperature"  
+  unit_of_measurement: "°F"  
+  value_template: '{{ value_json.temperature | round(1) }}'  
+
+- platform: mqtt
+  state_topic: "jizar/ms2"
+  name: "MS2 Real Feel"
+  unit_of_measurement: "°F"
+  value_template: '{{ value_json.heatIndex | round(1) }}'
+#
+##################### Multi Sensor 3 ##############################
+#
+- platform: mqtt  
+  state_topic: "jizar/ms3"  
+  name: "MS3 Humidity"  
+  unit_of_measurement: "%"  
+  value_template: '{{ value_json.humidity | round(1) }}'  
+  
+- platform: mqtt  
+  state_topic: "jizar/ms3"  
+  name: "MS3 LDR"
+  ##This sensor is not calibrated to actual LUX. Rather, this a map of the input voltage ranging from 0 - 1023.
+  unit_of_measurement: "LUX"  
+  value_template: '{{ value_json.ldr }}'  
+  
+- platform: mqtt  
+  state_topic: "jizar/ms3"  
+  name: "MS3 PIR"  
+  value_template: '{{ value_json.motion }}'  
+  
+- platform: mqtt  
+  state_topic: "jizar/ms3"  
+  name: "MS3 Temperature"  
+  unit_of_measurement: "°F"  
+  value_template: '{{ value_json.temperature | round(1) }}'  
+
+- platform: mqtt
+  state_topic: "jizar/ms3"
+  name: "MS3 Real Feel"
+  unit_of_measurement: "°F"
+  value_template: '{{ value_json.heatIndex | round(1) }}'
+ #
+##################### Multi Sensor 4 ##############################
+#
+- platform: mqtt  
+  state_topic: "jizar/ms4"  
+  name: "MS4 Humidity"  
+  unit_of_measurement: "%"  
+  value_template: '{{ value_json.humidity | round(1) }}'  
+  
+- platform: mqtt  
+  state_topic: "jizar/ms4"  
+  name: "MS4 LDR"
+  ##This sensor is not calibrated to actual LUX. Rather, this a map of the input voltage ranging from 0 - 1023.
+  unit_of_measurement: "LUX"  
+  value_template: '{{ value_json.ldr }}'  
+  
+- platform: mqtt  
+  state_topic: "jizar/ms4"  
+  name: "MS4 PIR"  
+  value_template: '{{ value_json.motion }}'  
+  
+- platform: mqtt  
+  state_topic: "jizar/ms4"  
+  name: "MS4 Temperature"  
+  unit_of_measurement: "°F"  
+  value_template: '{{ value_json.temperature | round(1) }}'  
+
+- platform: mqtt
+  state_topic: "jizar/ms4"
+  name: "MS4 Real Feel"
+  unit_of_measurement: "°F"
+  value_template: '{{ value_json.heatIndex | round(1) }}'

@@ -7,20 +7,23 @@
 
 ########################  My phone  #######################
 
-- platform: owntracks
-  cd max_gps_accuracy: 100
+- platform: owntracks_http
+  max_gps_accuracy: 200
   waypoints: true
 
 ############################################################
 
-- platform: netgear
-  host: 192.168.1.1
-  username: !secret nguser
-  password: !secret ngpass
-  track_new_devices: false
+# - platform: netgear
+  # host: 192.168.1.1
+  # username: !secret nguser
+  # password: !secret ngpass
+  # track_new_devices: false
   
 - platform: mqtt
   devices:
-    jizar_jizar: /location/jizar
-    jizar_nil: /location/nil
+    jizar: /location/jizar
+    nil: /location/nil
     scarlett: /location/scarlett
+    nenem: /location/nenem
+    
+# - platform: bluetooth_tracker

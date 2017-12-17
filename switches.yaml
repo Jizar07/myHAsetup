@@ -1,8 +1,16 @@
 ## Sonoffs
-#51
+# 50
 - platform: mqtt
-  name: 'Boys TV'
-  icon: mdi:television
+  name: 'Sonoff50'
+  state_topic: "stat/sonoff50/POWER"
+  command_topic: "cmnd/sonoff50/power"
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  retain: true
+# 51
+- platform: mqtt
+  name: 'Sonoff51'
   state_topic: "stat/sonoff51/POWER"
   command_topic: "cmnd/sonoff51/power"
   qos: 1
@@ -10,20 +18,18 @@
   payload_off: "OFF"
   retain: true
 
-## 52
+# 52
 - platform: mqtt
-  name: 'master'
-  icon: mdi:ceiling-light
-  state_topic: "stat/master/POWER"
-  command_topic: "cmnd/master/power"
+  name: 'Sonoff52'
+  state_topic: "stat/sonoff52/POWER"
+  command_topic: "cmnd/sonoff52/power"
   qos: 1
   payload_on: "ON"
   payload_off: "OFF"
   retain: true
-## 53
+# 53
 - platform: mqtt
-  name: 'Dinning Room'
-  icon: mdi:ceiling-light
+  name: 'Sonoff53'
   state_topic: "stat/sonoff53/POWER"
   command_topic: "cmnd/sonoff53/power"
   qos: 1
@@ -32,38 +38,82 @@
   retain: true
 # 54
 - platform: mqtt
-  name: 'Red Rope'
-  icon: mdi:lightbulb
+  name: 'sonoff54'
   state_topic: "stat/sonoff54/POWER"
   command_topic: "cmnd/sonoff54/power"
   qos: 1
   payload_on: "ON"
   payload_off: "OFF"
   retain: true
-## 55
+# 55
 - platform: mqtt
-  name: 'Computer'
-  icon: mdi:desktop-classic
-  state_topic: "stat/computer/POWER"
-  command_topic: "cmnd/computer/power"
+  name: 'sonoff55'
+  state_topic: "stat/sonoff55/POWER"
+  command_topic: "cmnd/sonoff55/power"
   qos: 1
   payload_on: "ON"
   payload_off: "OFF"
   retain: true
 # 56
 - platform: mqtt
-  name: 'blue'
-  icon: mdi:lightbulb
-  state_topic: "stat/blue/POWER"
-  command_topic: "cmnd/blue/power"
-  qos: 1
+  name: 'Sonoff56'
+  state_topic: "stat/sonoff56/POWER"
+  command_topic: "cmnd/sonoff56/power"
   payload_on: "ON"
   payload_off: "OFF"
+  optimistic: false
+  qos: 1
   retain: true
-#
-- platform: rpi_gpio
-  ports:
-    21: siren
+# 57
+- platform: mqtt
+  name: 'Sonoff57'
+  state_topic: "stat/sonoff57/POWER1"
+  command_topic: "cmnd/sonoff57/power1"
+  payload_on: "ON"
+  payload_off: "OFF"
+ #  payload_available: "ON"
+  payload_not_available: "UNAVAILABLE"
+  optimistic: false
+  qos: 1
+  retain: true
+  # 57B
+- platform: mqtt
+  name: 'Sonoff57B'
+  state_topic: "stat/sonoff57/POWER2"
+  command_topic: "cmnd/sonoff57/power2"
+  payload_on: "ON"
+  payload_off: "OFF"
+ #  payload_available: "ON"
+  payload_not_available: "UNAVAILABLE"
+  optimistic: false
+  qos: 1
+  retain: true
+  # 58
+- platform: mqtt
+  name: 'Sonoff58'
+  state_topic: "stat/sonoff58/POWER"
+  command_topic: "cmnd/sonoff58/power"
+  payload_on: "ON"
+  payload_off: "OFF"
+ #  payload_available: "ON"
+  payload_not_available: "UNAVAILABLE"
+  optimistic: false
+  qos: 1
+  retain: true
+# 59
+- platform: mqtt
+  name: 'Sonoff59'
+  state_topic: "stat/sonoff59/POWER"
+  command_topic: "cmnd/sonoff59/power"
+  payload_on: "ON"
+  payload_off: "OFF"
+  optimistic: false
+  qos: 1
+  retain: true
+  
+# - platform: rpi_gpio
+  # ports:
+    # 21: siren
     
 - platform: template
   switches:

@@ -36,3 +36,7 @@ themes:
     secondary-text-color: "var(--primary-color)"
     table-row-background-color: "var(--paper-card-background-color)"
     table-row-alternative-background-color: "var(--sidebar-text_-_background)"
+    
+
+extra_html_url:
+  - /local/custom_ui/state-card-custom-ui.html

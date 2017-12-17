@@ -17,6 +17,8 @@
           entities:
              - sensor.motion_sensor_temperature
              - sensor.dark_sky_temperature
+             - sensor.dark_sky_humidity
+             - sensor.dark_sky_wind_speed
           # text_template: '${entity.state ? entity.state : "unknown"}'
           # An example of rounding up a number, i.e. a temperature of 90.1 becomes 91
           text_template: '${entity.state ? Math.ceil(entity.state) : "undefined"}'  
@@ -29,13 +31,17 @@
             else
               return "temp-high";
             '
+###################################################################################
+
         - name: Time
           entities:
              - sensor.time
              - sensor.date
              - sensor.template_last_motion
           text_template: '${(entity.state)}'
-                      
+          
+ ###################################################################################
+                     
         - name: Mail
           entities:
              - sensor.deliveries_today
@@ -44,54 +50,62 @@
              - sensor.jizar
           text_template: '${(entity.state)}'
           
+###################################################################################
+        
         - name: Meter
           entities:
              - sensor.aeotec_dsb09104_home_energy_meter_energy
           text_template: '${(entity.state)}'
           
+ ###################################################################################
+         
         - name: Lights
           entities:
-               - light.boys_room
-               - light.master
-               - light.hallway
-               - light.laundry
-               - light.backyard
-               - switch.dinning_room
-               - switch.kitchen
-               - switch.red_rope
-               - switch.blue
+               - light.boys_room_light
+               - light.master_bedroom_light
+               - light.hallway_light
+               - light.laundry_room_light
+               - light.backyard_light
+               - switch.sonoff58   
+               - switch.sonoff59
+               - switch.kitchen_lights
                - switch.front_of_the_house
-               - switch.master
-               - switch.boys_tv
-               - switch.computer
                
           states:
             - state: 'on'
-              class: 'light-on'
+              class: 'area-on'              
+            - state: 'off'
+              class: 'area-off'
+            - state: 'unavailable'
+              class: 'info-text'
+          action:
+            domain: homeassistant
+            service: toggle
+            
+ ################################################################################
+ 
+        - name: Switches
+          entities:
+               - switch.sonoff50   
+               - switch.sonoff51
+               - switch.sonoff52  
+               - switch.sonoff53
+               - switch.sonoff54   
+               - switch.sonoff55
+               - switch.sonoff56
+               
+          states:
+            - state: 'on'
+              class: 'light-on'              
             - state: 'off'
               class: 'light-off'
+            - state: 'unavailable'
+              class: 'info-text'
           action:
             domain: homeassistant
             service: toggle
 
-        # - name: Switches
-          # entities:
-             # - switch.doorbell
-          # states:
-            # - state: 'on'
-              # class: 'doorbell-on'
-            # - state: 'off'
-              # class: 'doorbell-off'
-
-        # - name: NVR
-          # entities:
-             # - binary_sensor.blue_iris_nvr
-          # text_template: '${(entity.state === "on") ? "online" : "offline"}'
-          # states:
-            # - state: 'off'
-              # class: 'danger-text'
-            # - state: 'on'
-              # class: 'success-text'
+###################################################################################
 
         - name: Alarm Panel
           entities:
@@ -104,16 +118,22 @@
             - state: 'disarmed'
               class: 'alarm-disarmed'
 
+###################################################################################
+              
         - name: Binary sensors
           entities:
             - binary_sensor.front_door_opened
             - binary_sensor.motion_sensor_motion
             - binary_sensor.patio_door_opened
           states:
+            - state: 'closed'
+              class: 'light-off'
             - state: 'off'
-              class: 'info-background'
-              fill: '#ffffff'
-            - state: 'on'
+              class: 'light-off'
+            - state: 'open'
+              class: 'warning-background'
+              fill: '#006600'
+            - state: 'detected'
               class: 'warning-background'
               fill: '#006600'
           state_transitions:
@@ -122,6 +142,8 @@
               to_state: 'off'
               duration: 10
 
+###################################################################################
+ 
         - name: Cameras
           entities:
             - camera.main_area
@@ -129,7 +151,9 @@
           states:
             - state: 'idle'
               class: 'camera-idle'
-              
+
+###################################################################################
+               
         - name: covers
           entities:
             - cover.garage_door
@@ -140,15 +164,21 @@
             - state: 'open'
               class: 'garage-open'
               fill: '#006600'
+            - state: 'on'
+              class: 'garage-open'
+              fill: '#006600'
           action:
             service: toggle
-            
+
+###################################################################################
+             
         - name: Media Players
           entities:
-            - media_player.google_assistant
+            - media_player.googlebox
             - media_player.mastercast
             - media_player.samsung_led32_un32j5303
-            - media_player.4k_un60ju7090
+            - media_player.samsung_led40_un40j5200
+            - media_player.4ktv
           states:
             - state: 'off'
               class: 'squeezebox-off'
@@ -158,22 +188,28 @@
               class: 'squeezebox-off'
             - state: 'playing'
               class: 'squeezebox-on'
+
 #############################################################################
 ####################################### MYSHIT ##############################
-#############################################################################       
+#############################################################################   
+    
         - name: Devices
           entities:
-            - device_tracker.jizar_nil
-            - device_tracker.jizar_jizar
+            - device_tracker.nilzete_s6
+            - device_tracker.jizar_j7
+            - device_tracker.jizar_mercedes
+            - device_tracker.scarlett_phone
+            - device_tracker.nenem_phone
           states:
-            - state: template
-              value_template: '{{ states.entity.state != "home" }}'
+            - state: 'not_home'
               class: 'invisible'
               
         - name: Cars
           entities:
             - sensor.jizarcar
             - sensor.nilcar
+            # - sensor.road1
+            # - sensor.road2
           states:
             - state: 'home'
               class: 'invisible'
@@ -200,6 +236,7 @@
               class: 'spin'
             - state: 'home'
               class: 'invisible'
+#
 #############################################################################
 ###################################### MYSHIT ###############################
 #############################################################################

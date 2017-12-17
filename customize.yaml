@@ -1,396 +1,370 @@
-##########################################################
-###################### AUTOMATIONS #######################
-##########################################################
-
-  automation.detection:
-    friendly_name: Dectection
-    icon: mdi:white-balance-iridescent
-#
-  automation.noac:
-    friendly_name: AC not working
-    icon: mdi:air-conditioner
-  automation.tempup:
-    friendly_name: Temperature Up
-    icon: mdi:thermometer-lines
-  automation.tempdown:
-    friendly_name: Temperature Down
-    icon: mdi:thermometer
-#
-  automation.update:
-    friendly_name: HA Update
-    icon: mdi:home-assistant
-#
-  automation.hourly:
-    friendly_name: Time Tell
-    icon: mdi:clock
-  automation.10_pm:
-    friendly_name: Timer 10 PM
-    icon: mdi:timer
-  automation.730_am:
-    friendly_name: Timer 7:30 AM
-    icon: mdi:timer
-  automation.boys_tv:
-    friendly_name: Boys TV Off
-    icon: mdi:television-classic
-#
-  automation.back_door:
-    friendly_name: Back Door Sensor
-    icon: mdi:glassdoor
-  automation.front_door:
-    friendly_name: Front Door Sensor
-    icon: mdi:glassdoor
-  automation.garage_door_open:
-    friendly_name: Garage Door Opened
-    icon: mdi:garage-open
-  automation.garage_door_closed:
-    friendly_name: Garage Door Closed
-    icon: mdi:garage
-#
-  automation.alarm_home:
-    friendly_name: In Home Alarm
-    icon: mdi:security-home
-  automation.alarm_away:
-    friendly_name: Away Alarm
-    icon: mdi:alarm-light
-  automation.flash_lights:
-    friendly_name: Flahs Lights
-    icon: mdi:alarm-light
-  automation.disarm:
-    friendly_name: Disarm Alarm
-    icon: mdi:alarm-off
-#
-  automation.delivery:
-    friendly_name: Mail
-    icon: mdi:mailbox
-#
-
-#
-##########################################################
-######################## SENSORS #########################
-##########################################################
-
-  alarm_control_panel.stoffels_alarm:
-    friendly_name: Alarm
-    icon: mdi:alarm
-#
-  binary_sensor.front_door_opened:
-    friendly_name: Front Door
-    icon: mdi:glassdoor
-#
-  binary_sensor.motion_sensor_motion:
-    friendly_name: Kitchen / Family Motion
-    icon: mdi:run-fast
-#
-  sensor.motion_sensor_temperature:
-    friendly_name: Main area Temperature
-    icon: mdi:thermometer
-#
-  binary_sensor.patio_door_opened:
-    friendly_name: Back Door
-    icon: mdi:glassdoor
-#
-  cover.garage_door:
-    friendly_name: Garage Door
-    icon: mdi:garage
-#
-  sensor.fastcom_download:
-    friendly_name: Internet Speed
-    icon: mdi:speedometer
-#
-  sensor.deliveries_today:
-    icon: mdi:package-variant
-#
-  sensor.packages_in_transit:
-    icon: mdi:truck-delivery
-
-##########################################################
-######################## PLAYERS #########################
-##########################################################
-
-  media_player.google_assistant:
-    friendly_name: Google Home
-    icon: mdi:google-assistant
-#
-  media_player.mastercast:
-    friendly_name: Master Cast
-    icon: mdi:cast   
-#
-  media_player.un60ju7090_un60ju7090:
-    friendly_name: 4K UN60JU7090
-    icon: mdi:television
-#
-  media_player.samsung_led32_un32j5303:
-    friendly_name: Boys Tv
-    icon: mdi:television
-#
-  media_player.daddys_kodi:
-    friendly_name: Jizar's Kodi
-    icon: mdi:kodi
-#
-  media_player.scarletts_kodi:
-    friendly_name: Scarlett's Kodi
-    icon: mdi:kodi
-#
-##########################################################
-######################## LIGHTS  #########################
-##########################################################
- 
-  light.backyard:
-    friendly_name: Backyard
-    icon: mdi:theme-light-dark
-    custom_ui_state_card: custom-ui
-    show_last_changed: true
-    extra_badge:
-        attribute: brightness
-#
-  light.hallway:
-    friendly_name: Hallway
-    icon: mdi:lightbulb
-    custom_ui_state_card: custom-ui
-    show_last_changed: true
-    extra_badge:
-        attribute: brightness
-#
-  light.laundry:
-    friendly_name: Laundry
-    icon: mdi:lightbulb
-    custom_ui_state_card: custom-ui
-    show_last_changed: true
-    extra_badge:
-        attribute: brightness
-#
-  light.boys_room:
-    friendly_name: Boys Room
-    icon: mdi:lightbulb
-    custom_ui_state_card: custom-ui
-    show_last_changed: true
-    extra_badge:
-        attribute: brightness
-#
-  light.master:
-    friendly_name: Master Bedroom
-    icon: mdi:lightbulb
-    custom_ui_state_card: custom-ui
-    show_last_changed: true
-    extra_badge:
-        attribute: brightness
-#
-##########################################################
-######################## SWITCHES ########################
-##########################################################
- 
-  switch.blue:
-    # emulated_hue: true
-    # emulated_hue_name: "Blue light"
-    friendly_name: Blue Rope
-    icon: mdi:blur-linear
-    # custom_ui_state_card: custom-ui
-    show_last_changed: true
-#
-  switch.red_rope:
-    # emulated_hue: true
-    # emulated_hue_name: "Red light"
-    friendly_name: Red Rope
-    icon: mdi:blur-linear
-    # custom_ui_state_card: custom-ui
-    show_last_changed: true
-#
-  switch.boys_tv:
-    # emulated_hue: true
-    # emulated_hue_name: "Boy's Tv"
-    friendly_name: Boy's TV
-    icon: mdi:television
-    # custom_ui_state_card: custom-ui
-    show_last_changed: true
-#
-  switch.front_of_the_house:
-    friendly_name: Driveway / Front Door
-    icon: mdi:theme-light-dark
-    # custom_ui_state_card: custom-ui
-    show_last_changed: true
-#
-  switch.computer:
-    # emulated_hue: true
-    # emulated_hue_name: "Gameroom"
-    friendly_name: Gameroom PC
-    icon: mdi:desktop-classic
-    # custom_ui_state_card: custom-ui
-    show_last_changed: true
-#
-  switch.kitchen:
-    friendly_name: Kitchen
-    icon: mdi:ceiling-light
-    # custom_ui_state_card: custom-ui
-    show_last_changed: true
-#
-  switch.dinning_room:
-    # emulated_hue: true
-    # emulated_hue_name: "Dinning Room"
-    friendly_name: Dinning Room
-    icon: mdi:ceiling-light
-    # custom_ui_state_card: custom-ui
-    show_last_changed: true
-#
-  switch.master:
-    # emulated_hue: true
-    # emulated_hue_name: "Scarlett's TV"
-    friendly_name: Scarlett's TV
-    icon: mdi:television
-    # custom_ui_state_card: custom-ui
-    show_last_changed: true
-
-##########################################################
-######################## Devices #########################
-##########################################################
-
-  device_tracker.jizar_nil:
-    friendly_name: Nil's Phone
-    entity_picture: /local/png/nil.png
-#
-  device_tracker.jizar_jizar:
-    friendly_name: Jizar's Phone
-    entity_picture: /local/png/jizar.png
-#
-  device_tracker.scarlett:
-    friendly_name: Scarlett's Phone
-    entity_picture: /local/png/scarlett.png
-#
-  sensor.nil:
-    friendly_name: Nil
-    entity_picture: /local/png/nil.png
-#
-  sensor.scarlett:
-    friendly_name: Scarlett
-    entity_picture: /local/png/scarlett.png
-#
-  sensor.jizar:
-    friendly_name: Jizar
-    entity_picture: /local/png/jizar.png
-#
-  # image_processing.id_tester:
-    # friendly_name: Faces Detected on Mycam
-    # icon: mdi:tag-faces
-
-  # image_processing.fd_tester:
-    # friendly_name: Face Indentity on MyCam
-    # icon: mdi:face-profile
-
-  # image_processing.id_ipcam:
-    # friendly_name: Faces Detected on IpCam
-    # icon: mdi:tag-faces
-
-  # image_processing.fd_ipcam:
-    # friendly_name: Face Indentity on IpCam
-    # icon: mdi:face-profile
-
-  # microsoft_face.stoffels:
-    # friendly_name: Stoffel's Family Members
-    # icon: mdi:face
-
-##########################################################
-######################## POWER   #########################
-##########################################################
-
-  sensor.aeotec_dsb09104_home_energy_meter_energy:
-    friendly_name: Total Energy used
-    icon: mdi:power-plug
-  sensor.aeotec_dsb09104_home_energy_meter_exporting:
-    friendly_name: Exporting Total
-    icon: mdi:export
-  sensor.aeotec_dsb09104_home_energy_meter_interval:
-    friendly_name:  Total Interval
-    icon: mdi:timer-sand
-  sensor.aeotec_dsb09104_home_energy_meter_power: 
-    polling_intensity: 1
-    refresh_value: 2
-    friendly_name: Total Power usage
-    icon: mdi:power
-  sensor.aeotec_dsb09104_home_energy_meter_previous_Reading:
-    friendly_name: Previous Total Reading
-    icon: mdi:chart-bar
-#
-  sensor.aeotec_dsb09104_home_energy_meter_energy_2:
-    friendly_name: Total energy
-    icon: mdi:flash
-  sensor.aeotec_dsb09104_home_energy_meter_exporting_2:
-    friendly_name: Exporting line 1
-    icon: mdi:export
-  sensor.aeotec_dsb09104_home_energy_meter_interval_2:
-    friendly_name: Interval line 1
-    icon: mdi:timer-sand
-  sensor.aeotec_dsb09104_home_energy_meter_power_2:
-    polling_intensity: 1
-    refresh_value: 2
-    friendly_name: Total Amperage
-    icon: mdi:flash
-  sensor.aeotec_dsb09104_home_energy_meter_previous_Reading_2:
-    friendly_name: Previous Reading line 1
-    icon: mdi:chart-bar
-#
-  sensor.aeotec_dsb09104_home_energy_meter_energy_3:
-    friendly_name: Incoming Energy line 2
-    icon: mdi:flash
-  sensor.aeotec_dsb09104_home_energy_meter_exporting_3:
-    friendly_name: Exporting line 2
-    icon: mdi:export
-  sensor.aeotec_dsb09104_home_energy_meter_interval_3:
-    friendly_name: Interval line 2
-    icon: mdi:timer-sand
-  sensor.aeotec_dsb09104_home_energy_meter_power_3:
-    friendly_name: Power usage line 2
-    icon: mdi:power
-  sensor.aeotec_dsb09104_home_energy_meter_previous_Reading_3:
-    friendly_name: Previous Reading line 2
-    icon: mdi:chart-bar
-#
-  sensor.aeotec_dsb09104_home_energy_meter_power_4:
-    friendly_name: Power 4
-    icon: mdi:power
-  sensor.aeotec_dsb09104_home_energy_meter_power_5:
-    friendly_name: Power 5
-    icon: mdi:power
-  sensor.aeotec_dsb09104_home_energy_meter_power_6:
-    friendly_name: Power 6
-    icon: mdi:power
-###############################################################################
-############################## CAMERAS #################################
-#######################################################################
-
-  camera.ip_camera:
-    friendly_name: Gameroom
-    icon: mdi:webcam
-  camera.main_area:
-    friendly_name: Main Area
-    icon: mdi:webcam
-    
-
-  binary_sensor.floorplan:
-    custom_ui_state_card: floorplan
-    floorplan_image: /local/custom_ui/floorplan/floorplan.svg
-   # password: <password_goes_here>
-    stylesheet: /local/custom_ui/floorplan/floorplan.css
-    color_on: '#006600'
-    color_off: '#ffffff'
-    track_duration: 10
-    last_motion_entity: sensor.template_last_motion
-    entities:
-      - binary_sensor.motion_sensor_motion
-      - binary_sensor.patio_door_opened
-      - binary_sensor.front_door_opened
-      
-#######################################################################
-############################## WEATHER ################################
-#######################################################################
-
-  sensor.dark_sky_nearest_storm_distance:
-    friendly_name: Near Storm
-  sensor.dark_sky_summary:
-    friendly_name: Summary
-  sensor.dark_sky_temperature:
-    friendly_name: Outside Temp.
-  sensor.dark_sky_humidity:
-    friendly_name: Humidity
-  sensor.dark_sky_pressure:
-    friendly_name: Pressure
-  sensor.dark_sky_visibility:
-    friendly_name: Visibility
+group.time:
+  order: 1
+group.tracker:
+  order: 2
+group.temperature:
+  order: 3
+group.alarm:
+  order: 4
+automation.detection:
+  friendly_name: Dectection
+  icon: mdi:white-balance-iridescent
+automation.noac:
+  friendly_name: AC not working
+  icon: mdi:air-conditioner
+automation.tempup:
+  friendly_name: Temperature Up
+  icon: mdi:thermometer-lines
+automation.tempdown:
+  friendly_name: Temperature Down
+  icon: mdi:thermometer
+automation.update:
+  friendly_name: HA Update
+  icon: mdi:home-assistant
+automation.hourly:
+  friendly_name: Time Tell
+  icon: mdi:clock
+automation.10_pm:
+  friendly_name: Timer 10 PM
+  icon: mdi:timer
+automation.730_am:
+  friendly_name: Timer 7:30 AM
+  icon: mdi:timer
+automation.boys_tv:
+  friendly_name: Boys TV Off
+  icon: mdi:television-classic
+automation.back_door:
+  friendly_name: Back Door Sensor
+  icon: mdi:glassdoor
+automation.front_door:
+  friendly_name: Front Door Sensor
+  icon: mdi:glassdoor
+automation.garage_door_open:
+  friendly_name: Garage Door Opened
+  icon: mdi:garage-open
+automation.garage_door_closed:
+  friendly_name: Garage Door Closed
+  icon: mdi:garage
+automation.alarm_home:
+  friendly_name: In Home Alarm
+  icon: mdi:security-home
+automation.alarm_away:
+  friendly_name: Away Alarm
+  icon: mdi:alarm-light
+automation.flash_lights:
+  friendly_name: Flahs Lights
+  icon: mdi:alarm-light
+automation.disarm:
+  friendly_name: Disarm Alarm
+  icon: mdi:alarm-off
+automation.delivery:
+  friendly_name: Mail
+  icon: mdi:mailbox
+alarm_control_panel.stoffels_alarm:
+  friendly_name: Alarm
+  icon: mdi:alarm
+binary_sensor.front_door_opened:
+  friendly_name: Front Door
+  icon: mdi:glassdoor
+binary_sensor.motion_sensor_motion:
+  friendly_name: Kitchen / Family Motion
+  icon: mdi:run-fast
+sensor.motion_sensor_temperature:
+  friendly_name: Main area Temperature
+  icon: mdi:thermometer
+binary_sensor.patio_door_opened:
+  friendly_name: Back Door
+  icon: mdi:glassdoor
+cover.garage_door:
+  friendly_name: Garage Door
+  icon: mdi:garage
+sensor.fastcom_download:
+  friendly_name: Internet Speed
+  icon: mdi:speedometer
+sensor.deliveries_today:
+  icon: mdi:package-variant
+sensor.packages_in_transit:
+  icon: mdi:truck-delivery
+media_player.googlebox:
+  friendly_name: Google Home
+  icon: mdi:google-assistant
+media_player.family_room_tv:
+  friendly_name: Master Cast
+  icon: mdi:cast
+media_player.plex_7xcleh4soojb4:
+  friendly_name: Master Bedroom Plex
+  icon: mdi:plex
+media_player.4ktv:
+  friendly_name: 4K TV
+  icon: mdi:television
+media_player.samsung_led32_un32j5303:
+  friendly_name: Boys Tv
+  icon: mdi:television
+media_player.samsung_led40_un40j5200:
+  friendly_name: Master Bedroom Tv
+  icon: mdi:television
+media_player.kodi:
+  friendly_name: Jizar's Kodi
+  icon: mdi:kodi
+media_player.scarletts_kodi:
+  friendly_name: Scarlett's Kodi
+  icon: mdi:kodi
+light.backyard_light:
+  friendly_name: Backyard
+  icon: mdi:theme-light-dark
+  show_last_changed: true
+  extra_badge:
+    attribute: brightness
+light.hallway_light:
+  friendly_name: Hallway
+  icon: mdi:lightbulb
+  extra_badge:
+    attribute: power_consumption
+    unit: W
+    blacklist_states: 0
+light.laundry_light:
+  friendly_name: Laundry
+  icon: mdi:lightbulb
+  show_last_changed: true
+  extra_badge:
+light.boys_light:
+  extra_badge:
+    attribute: brightness
+  friendly_name: Boys Room
+  icon: mdi:lightbulb
+  show_last_changed: true
+light.master_bedroom_light:
+  friendly_name: Master Bedroom
+  icon: mdi:lightbulb
+  show_last_changed: true
+  extra_badge:
+    attribute: brightness
+switch.sonoff50:
+  friendly_name: Sonoff Pow
+  icon: mdi:power-socket-us
+  show_last_changed: true
+  extra_badge:
+    attribute: power_consumption
+    unit: W
+    blacklist_states: 0
+switch.sonoff51:
+  friendly_name: 3D Printer
+  icon: mdi:printer-3d
+  show_last_changed: true
+switch.sonoff52:
+  friendly_name: Scarlett's TV
+  icon: mdi:television
+  show_last_changed: true
+switch.sonoff53:
+  friendly_name: Gamer's TV
+  icon: mdi:television
+  show_last_changed: true
+switch.sonoff54:
+  friendly_name: Sonoff 54
+  icon: mdi:desktop-classic
+  show_last_changed: true
+switch.sonoff55:
+  friendly_name: Boy's TV
+  icon: mdi:television
+  show_last_changed: true
+switch.sonoff56:
+  friendly_name: Blue Rope
+  icon: mdi:blur-linear
+  show_last_changed: true
+switch.sonoff57:
+  friendly_name: Gameroom Light
+  icon: mdi:ceiling-light
+  show_last_changed: true
+switch.sonoff57b:
+  friendly_name: Backyard's Light
+  icon: mdi:lightbulb
+  show_last_changed: true
+switch.sonoff58:
+  friendly_name: Dining Room
+  icon: mdi:ceiling-light
+  show_last_changed: true
+switch.sonoff59:
+  friendly_name: Scarlett's Light
+  icon: mdi:ceiling-light
+  show_last_changed: true
+switch.frontyard_lights:
+  friendly_name: Driveway / Front Door
+  icon: mdi:theme-light-dark
+  show_last_changed: true
+switch.kitchen:
+  friendly_name: Kitchen
+  icon: mdi:ceiling-light
+  show_last_changed: true
+device_tracker.nilzete_s6:
+  friendly_name: Nil's DT
+  entity_picture: /local/png/nil.png
+device_tracker.jizar_j7:
+  friendly_name: Jizar's DT
+  entity_picture: /local/png/jizar.png
+device_tracker.scarlett_phone:
+  friendly_name: Scarlett's DT
+  entity_picture: /local/png/scarlett.png
+device_tracker.nenem_phone:
+  friendly_name: Nenem's DT
+  entity_picture: /local/png/nenem.png
+sensor.nil:
+  friendly_name: Nil GEO
+  entity_picture: /local/png/nil.png
+sensor.scarlett:
+  friendly_name: Scarlett GEO
+  entity_picture: /local/png/scarlett.png
+sensor.jizar:
+  entity_picture: /local/png/jizar.png
+  friendly_name: Jizar GEO
+  show_last_changed: true
+sensor.nenem:
+  friendly_name: Nenem GEO
+  entity_picture: /local/png/nenem.png
+sensor.aeotec_dsb09104_home_energy_meter_energy:
+  friendly_name: Total Energy used
+  icon: mdi:power-plug
+sensor.aeotec_dsb09104_home_energy_meter_exporting:
+  friendly_name: Exporting Total
+  icon: mdi:export
+sensor.aeotec_dsb09104_home_energy_meter_interval:
+  friendly_name: Total Interval
+  icon: mdi:timer-sand
+sensor.aeotec_dsb09104_home_energy_meter_power:
+  polling_intensity: 1
+  refresh_value: 2
+  friendly_name: Total Power usage
+  icon: mdi:power
+sensor.aeotec_dsb09104_home_energy_meter_previous_Reading:
+  friendly_name: Previous Total Reading
+  icon: mdi:chart-bar
+sensor.aeotec_dsb09104_home_energy_meter_energy_2:
+  friendly_name: Total energy
+  icon: mdi:flash
+sensor.aeotec_dsb09104_home_energy_meter_exporting_2:
+  friendly_name: Exporting line 1
+  icon: mdi:export
+sensor.aeotec_dsb09104_home_energy_meter_interval_2:
+  friendly_name: Interval line 1
+  icon: mdi:timer-sand
+sensor.aeotec_dsb09104_home_energy_meter_power_2:
+  polling_intensity: 1
+  refresh_value: 2
+  friendly_name: Total Amperage
+  icon: mdi:flash
+sensor.aeotec_dsb09104_home_energy_meter_previous_Reading_2:
+  friendly_name: Previous Reading line 1
+  icon: mdi:chart-bar
+sensor.aeotec_dsb09104_home_energy_meter_energy_3:
+  friendly_name: Incoming Energy line 2
+  icon: mdi:flash
+sensor.aeotec_dsb09104_home_energy_meter_exporting_3:
+  friendly_name: Exporting line 2
+  icon: mdi:export
+sensor.aeotec_dsb09104_home_energy_meter_interval_3:
+  friendly_name: Interval line 2
+  icon: mdi:timer-sand
+sensor.aeotec_dsb09104_home_energy_meter_power_3:
+  friendly_name: Power usage line 2
+  icon: mdi:power
+sensor.aeotec_dsb09104_home_energy_meter_previous_Reading_3:
+  friendly_name: Previous Reading line 2
+  icon: mdi:chart-bar
+sensor.aeotec_dsb09104_home_energy_meter_power_4:
+  friendly_name: Power 4
+  icon: mdi:power
+sensor.aeotec_dsb09104_home_energy_meter_power_5:
+  friendly_name: Power 5
+  icon: mdi:power
+sensor.aeotec_dsb09104_home_energy_meter_power_6:
+  friendly_name: Power 6
+  icon: mdi:power
+camera.ip_camera:
+  friendly_name: Gameroom
+  icon: mdi:webcam
+camera.main_area:
+  friendly_name: Main Area
+  icon: mdi:webcam
+binary_sensor.floorplan:
+  custom_ui_state_card: floorplan
+  floorplan_image: /local/custom_ui/floorplan/floorplan.svg
+  stylesheet: /local/custom_ui/floorplan/floorplan.css
+  color_on: '#006600'
+  color_off: '#ffffff'
+  track_duration: 10
+  last_motion_entity: sensor.template_last_motion
+  entities:
+  - binary_sensor.motion_sensor_motion
+  - binary_sensor.patio_door_opened
+  - binary_sensor.front_door_opened
+sensor.dark_sky_nearest_storm_distance:
+  friendly_name: Near Storm
+sensor.dark_sky_summary:
+  friendly_name: Summary
+sensor.dark_sky_temperature:
+  friendly_name: Outside Temperature
+sensor.dark_sky_humidity:
+  friendly_name: Humidity
+sensor.dark_sky_pressure:
+  friendly_name: Pressure
+sensor.dark_sky_visibility:
+  friendly_name: Visibility
+sensor.MS1_temperature:
+  friendly_name: Boys Room Temperature
+  icon: mdi:thermometer
+sensor.MS1_Humidity:
+  friendly_name: Boys Room Humidity
+  icon: mdi:water-percent
+sensor.MS1_ldr:
+  friendly_name: Boys Room Light Sensor
+  icon: mdi:white-balance-sunny
+sensor.MS1_pir:
+  friendly_name: Boys Room Movement
+  icon: mdi:run-fast
+light.MS1_led:
+  friendly_name: Boys Room Led
+  icon: mdi:led-variant-outline
+sensor.MS2_temperature:
+  friendly_name: Scarletts Room Temperature
+  icon: mdi:thermometer
+sensor.MS2_Humidity:
+  friendly_name: Scarletts Room Humidity
+  icon: mdi:water-percent
+sensor.MS2_ldr:
+  friendly_name: Scarletts Room Light Sensor
+  icon: mdi:white-balance-sunny
+sensor.MS2_pir:
+  friendly_name: Scarletts Room Movement
+  icon: mdi:run-fast
+light.MS2_led:
+  friendly_name: Scarletts Room Led
+  icon: mdi:led-variant-outline
+sensor.MS3_temperature:
+  friendly_name: Gameroom Temperature
+  icon: mdi:thermometer
+sensor.MS3_Humidity:
+  friendly_name: Gameroom Humidity
+  icon: mdi:water-percent
+sensor.MS3_ldr:
+  friendly_name: Gameroom Light Sensor
+  icon: mdi:white-balance-sunny
+sensor.MS3_pir:
+  friendly_name: Gameroom Movement
+  icon: mdi:run-fast
+light.MS3_led:
+  friendly_name: Gameroom Led
+  icon: mdi:led-variant-outline
+sensor.MS4_temperature:
+  friendly_name: Master Bedroom Temperature
+  icon: mdi:thermometer
+sensor.MS4_Humidity:
+  friendly_name: Master Bedroom Humidity
+  icon: mdi:water-percent
+sensor.MS4_ldr:
+  friendly_name: Master Bedroom Light Sensor
+  icon: mdi:white-balance-sunny
+sensor.MS4_pir:
+  friendly_name: Master Bedroom Movement
+  icon: mdi:run-fast
+light.MS4_led:
+  friendly_name: Master Bedroom Led
+  icon: mdi:led-variant-outline
